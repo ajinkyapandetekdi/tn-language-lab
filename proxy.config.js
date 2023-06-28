@@ -3,7 +3,7 @@ const PROXY_CONFIG = [
         context: [
             "/v1/telemetry"
         ],
-        "target": 'https://telemetry-dev.theall.ai',
+        "target": 'https://telemetry.theall.ai',
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": true
