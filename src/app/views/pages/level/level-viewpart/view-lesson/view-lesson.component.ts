@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Location, LocationStrategy } from '@angular/common';
 
@@ -15,11 +15,26 @@ export class ViewLessonComponent implements OnInit {
   option3Selected: boolean;
   textShow:boolean;
 
+  @ViewChild('iframe1') iframe1: ElementRef;
+
+
+  lessonProgress: number = 0; // Current lesson progress value
+  totalQuestions: number = 4; // Total number of questions
+
   constructor(private sanitizer: DomSanitizer, private location: Location, private locationStrategy: LocationStrategy) { }
 
   ngOnInit(): void {
+    window.addEventListener('message', (event: MessageEvent) => {
+      if (event.data === 'start-recording') {
+        this.updateLessonProgress();
+      }
+    });
   }
 
+
+  updateLessonProgress() {
+    this.lessonProgress = this.lessonProgress+1;
+  }
 
   switchModelAnswer(option){
     if(option === 'option1'){

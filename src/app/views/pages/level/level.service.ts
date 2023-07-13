@@ -16,6 +16,7 @@ export class LevelService {
   nextLessonId =  '';
   path;
   mechanic :any;
+  showFeedbackPopup = false;
   constructor(private httpService: HttpClient, public telemetryService: TelemetryService, private _route: ActivatedRoute,
     private _router: Router) { }
 
@@ -28,13 +29,14 @@ export class LevelService {
   }
 
   playNextLesson(){
-    this.currentLessonData = this.getNextLesson();
-    this._router.navigate(['/level'], {
-      queryParams: {
-        lesson: this.currentLessonData.pid,
-        topic: this.currentLessonData.lid
-      }
-    });
+    this.showFeedbackPopup = true;
+    // this.currentLessonData = this.getNextLesson();
+    // this._router.navigate(['/level'], {
+    //   queryParams: {
+    //     lesson: this.currentLessonData.pid,
+    //     topic: this.currentLessonData.lid
+    //   }
+    // });
   }
 
   getNextLesson(){

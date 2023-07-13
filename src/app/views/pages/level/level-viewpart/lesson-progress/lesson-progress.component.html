@@ -1,0 +1,8 @@
+<ng-container *ngFor="let question of questions; let i = index" class="checkbox-container">
+  <input type="checkbox" [checked]="i < progress" disabled class="checkbox-input">
+  <label class="checkbox-label">Question {{ i + 1 }}</label>
+</ng-container>
+
+<ng-container *ngIf="levelService.showFeedbackPopup">
+  <app-feedback-popup (feedbackSubmitted)="handleFeedbackSubmission($event)"></app-feedback-popup>
+</ng-container>

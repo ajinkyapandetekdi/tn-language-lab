@@ -1,5 +1,10 @@
 <div *ngIf="lessonData">
-  <h4 class="rounded bg-light py-3 px-4">{{lessonData?.title}}</h4>
+  <h4 class="rounded bg-light py-3 px-4">
+    {{lessonData?.title}}
+    <span class="lesson-progress">[{{lessonProgress}}/{{totalQuestions}}]</span>
+  </h4>
+  <app-lesson-progress *ngIf="lessonData.progressArray" [progress]="lessonProgress" [questionCount]="totalQuestions"></app-lesson-progress>
+
   <div *ngFor="let item of lessonData.data;">
     <section *ngIf="item.type == 'html'" [innerHTML]="item.content">
     </section>
@@ -9,13 +14,13 @@
     </section>
 
     <section *ngIf="item.type == 'audio'">
-      <audio class="w-100 mt-4" controls >
+      <audio (play)="updateLessonProgress()"  class="w-100 mt-4" controls >
         <source [src]="item.content" type="audio/mpeg">
         Your browser does not support the audio element.
       </audio>
     </section>
     <section *ngIf="item.type == 'video'">
-      <video class="w-50 mx-auto mt-4 rounded" controls>
+      <video (play)="updateLessonProgress()" class="w-50 mx-auto mt-4 rounded" controls>
         <source [src]="item.content" type="video/mp4">
         <track id="track" [src]="item.subtitles" kind="subtitles" srclang="en" label="English" default />
         Your browser does not support the video element.
@@ -38,14 +43,14 @@
 
 
     <section *ngIf="item.type == 'images'">
-     <ng-container  *ngFor="let image of item.content;">
+     <ng-container *ngFor="let image of item.content;">
       <img width="{{image.width}}" height="{{image.height}}"  src="{{image.src}}"> &nbsp;&nbsp;
       <!-- <p>{{image.name}}</p> -->
      </ng-container>
     </section>
 
     <section *ngIf="item.type == 'options'">
-      <div class="d-flex justify-content-around">
+      <div (click)="updateLessonProgress()" class="d-flex justify-content-around">
         <!-- <ng-container *ngFor="let option of item.content; let i = index">
           <div [ngClass]="!option1Selected ? 'opt-unselected' : 'opt-selected'" (click)="switchModelAnswer(i)">
             <div *ngIf="item.content[i].imageSrc"><img width="200" height="200"  src="{{item.content[i].imageSrc}}"> &nbsp;&nbsp;
@@ -139,7 +144,7 @@
             <div *ngIf="item.content[0].modelImageSrc"><img width="200" height="200"  src="{{item.content[0].modelImageSrc}}"> &nbsp;&nbsp;</div>
             <div class="mt-5">
               <div *ngIf="item.content[0].modelAudioSrc">
-                <audio class="w-30 mt-4" controls >
+                <audio (play)="updateLessonProgress()" class="w-30 mt-4" controls >
                   <source [src]="item.content[0].modelAudioSrc" type="audio/mp3">
                 Your browser does not support the audio element.
                 </audio>
@@ -163,7 +168,7 @@
             <div *ngIf="item.content[1].modelImageSrc"><img width="200" height="200"  src="{{item.content[1].modelImageSrc}}"> &nbsp;&nbsp;</div>
             <div class="mt-5">
               <div *ngIf="item.content[1].modelAudioSrc">
-                <audio class="w-30 mt-4" controls >
+                <audio (play)="updateLessonProgress()" class="w-30 mt-4" controls >
                   <source [src]="item.content[1].modelAudioSrc" type="audio/mp3">
                 Your browser does not support the audio element.
                 </audio>
@@ -187,7 +192,7 @@
             <div *ngIf="item.content[2].modelImageSrc"><img width="200" height="200"  src="{{item.content[2].modelImageSrc}}"> &nbsp;&nbsp;</div>
             <div class="mt-5">
               <div *ngIf="item.content[2].modelAudioSrc">
-                <audio class="w-30 mt-4" controls >
+                <audio (play)="updateLessonProgress()" class="w-30 mt-4" controls >
                   <source [src]="item.content[2].modelAudioSrc" type="audio/mp3">
                 Your browser does not support the audio element.
                 </audio>
@@ -199,7 +204,7 @@
             </div>
           </ng-container>
         </div>
-        <section>
+        <section (click)="updateLessonProgress()">
           <iframe allow="microphone" width=100%; [src]="'lets-talk/Open Story.html' | safe: 'resourceUrl'"></iframe>
         </section>
       </div>

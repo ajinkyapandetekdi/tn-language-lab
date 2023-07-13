@@ -18,6 +18,8 @@ import { ThinkAndWriteComponent } from './level-viewpart/think-and-write/think-a
 import { WordHelpComponent } from './level-viewpart/word-help/word-help.component';
 import { ViewLessonComponent } from './level-viewpart/view-lesson/view-lesson.component';
 import { SafePipe } from '../../../safePipe';
+import { LessonProgressComponent } from './level-viewpart/lesson-progress/lesson-progress.component';
+import { FeedbackPopupComponent } from './level-viewpart/feedback-popup/feedback-popup.component';
 
 
 
@@ -48,7 +50,9 @@ const routes: Routes = [
     ThinkAndWriteComponent,
     WordHelpComponent,
     ViewLessonComponent,
-    SafePipe
+    SafePipe,
+    LessonProgressComponent,
+    FeedbackPopupComponent
 
   ],
   imports: [
