@@ -13,15 +13,15 @@
       />
     </div>
     <div class="left-container-heading">
-      <span>Login to </span> <br />
-      <span> MOZHIGAL</span>
+      <span>{{ 'COMMON_LOGIN_TO' | i18next }}</span> <br />
+      <span> {{ 'COMMON_MOZHIGAL' | i18next }}</span>
     </div>
   </div>
   <div class="login-container">
     <!-- <h2>Welcome to Mozhigal</h2> -->
     <div class="translate-container">
-      <span>Eng </span>
-      <span>/ தமிழ்</span>
+      <span  (click)="switchToEnglish()">Eng </span>
+      <span (click)="switchToTamil()">/ தமிழ்</span>
     </div>
     <div style="text-align: center">
       <img
@@ -37,7 +37,7 @@
     <form class="login-form">
       <div class="form-group">
         <label for="username" [style.color]="loginError ? 'red' : ''"
-          >Username</label
+          >{{ 'USER_USERNAME' | i18next }}</label
         >
         <input
           [style.color]="loginError ? 'red' : ''"
@@ -56,7 +56,7 @@
 
       <div class="form-group">
         <label for="password" [style.color]="loginError ? 'red' : ''"
-          >Password</label
+          >{{ 'USER_PASSWORD' | i18next }}</label
         >
         <input
           [style.color]="loginError ? 'red' : ''"
@@ -97,8 +97,8 @@
           required
         />
       </div> -->
-      <button (click)="login()" type="submit">Login</button>
-      <button (click)="loginAsGuest()" class="login-via-mobile">Continue as Guest</button>
+      <button (click)="login()" type="submit">{{ 'USER_LOGIN' | i18next }}</button>
+      <button (click)="loginAsGuest()" class="login-via-mobile">{{ 'USER_CONTINUE_AS_GUEST' | i18next }}</button>
     </form>
   </div>
 </div>

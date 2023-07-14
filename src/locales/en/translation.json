@@ -44,5 +44,11 @@
   "HOME_PARENT_OF_SUJITHRA_CLASS_IX": "Parent of Sujithra, Class IX",
   "HOME_PARTNERS": "Partners",
   "HOME_TNSCERT_PARTNERS_WITH": "TNSCERT Partners with",
-  "HOME_BOOST_YOUR_LEARNING": "Boost your learning with Super language Lab"
+  "HOME_BOOST_YOUR_LEARNING": "Boost your learning with Super language Lab",
+  "USER_USERNAME":"Username",
+  "USER_PASSWORD":"Password",
+  "USER_LOGIN":"Login",
+  "USER_CONTINUE_AS_GUEST":"Continue as Guest",
+  "COMMON_LOGIN_TO":"Login to",
+  "COMMON_MOZHIGAL":"MOZHIGAL"
 }

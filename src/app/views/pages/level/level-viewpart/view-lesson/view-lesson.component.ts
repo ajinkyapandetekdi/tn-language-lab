@@ -20,6 +20,7 @@ export class ViewLessonComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
   switchModelAnswer(option){
     if(option === 'option1'){
       this.option1Selected = true;

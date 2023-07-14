@@ -15,18 +15,59 @@ export class HomeComponent implements OnInit {
 
   isUserActive = false;
 
-@HostListener('window:message',['$event'])
-onMessage(e)
-{
-if (e.origin!="http://localhost:4200")
-  {
-  return false;
+  customOptions: OwlOptions = {
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: true,
+    navSpeed: 700,
+    navText: ['', ''],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 1
+      },
+      740: {
+        items: 1
+      },
+      940: {
+        items: 1
+      }
+    },
+    nav: false
   }
-if (e.data.for=="user")
-  {
-    this.router.navigate(["level"])
+
+
+  customOptions78: OwlOptions = {
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    navSpeed: 700,
+
+    navText: ['<i class="bi bi-chevron-compact-left"></i>', '<i class="bi bi-chevron-right"></i>'],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 1,
+        nav: false,
+        dots: true,
+      },
+      740: {
+        items: 1
+      },
+      940: {
+        items: 1,
+        nav: true,
+        dots: false,
+      }
+    },
+
   }
-}
+
   constructor(public telemetryService: TelemetryService, private router:Router, public logsService: LogsService, public authService: AuthService) { }
 
   ngOnInit(): void {
@@ -55,60 +96,6 @@ if (e.data.for=="user")
             $("#panel").slideToggle("fast");
           });
         });
-  }
-  customOptions: OwlOptions = {
-    loop: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    dots: true,
-    navSpeed: 700,
-    navText: ['', ''],
-    responsive: {
-      0: {
-        items: 1
-      },
-      400: {
-        items: 1
-      },
-      740: {
-        items: 1
-      },
-      940: {
-        items: 1
-      }
-    },
-    nav: false
-  }
-
-
-  customOptions78: OwlOptions = {
-    loop: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    navSpeed: 700,
-
-    navText: ['<i class="bi bi-chevron-compact-left"></i>', '<i class="bi bi-chevron-right"></i>'],
-    responsive: {
-      0: {
-        items: 1
-      },
-      400: {
-        items: 1,
-        nav: false,
-        dots: true,
-      },
-      740: {
-        items: 1
-      },
-      940: {
-        items: 1,
-        nav: true,
-        dots: false,
-      }
-    },
-
   }
 
   goToLevelAndRouting()
