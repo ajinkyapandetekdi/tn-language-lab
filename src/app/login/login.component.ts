@@ -4,6 +4,8 @@ import { AuthService } from '../auth.service';
 import { TelemetryService } from '../telemetry.service';
 import { environment } from 'src/environments/environment';
 import { UserService } from '../user/user.service';
+import { Location } from '@angular/common';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -23,7 +25,8 @@ export class LoginComponent {
     public userService: UserService,
     public telemetryService: TelemetryService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {}
 
   ngOnInit() {
@@ -33,7 +36,7 @@ export class LoginComponent {
     localStorage.removeItem('token');
     this.telemetryService.interact('LoginAsGuest', 'Login');
     localStorage.setItem('guestUser', 'true');
-    this.router.navigate(['/level']);
+    window.location.href = '/level';
   }
   login() {
     this.telemetryService.interact('Submit', 'Login');
@@ -49,7 +52,7 @@ export class LoginComponent {
             users
           );
 
-          this.router.navigate(['/level']);
+          window.location.href = '/level';
 
           this.loginError = false;
         } else {
