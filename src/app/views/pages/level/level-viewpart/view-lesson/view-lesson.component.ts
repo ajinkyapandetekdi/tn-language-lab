@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Location, LocationStrategy } from '@angular/common';
 
+
 @Component({
   selector: 'app-view-lesson',
   templateUrl: './view-lesson.component.html',

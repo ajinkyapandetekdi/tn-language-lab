@@ -1,0 +1,86 @@
+<div class="main-container">
+  <div class="questions">
+    <h4>{{ questionIndex + 1 }}. {{ questions[questionIndex] }}</h4>
+    <h5>{{questionsInTamil[questionIndex]}}</h5>
+  </div>
+
+  <!-- [(ngModel)]="userInput" -->
+  <div class="container">
+    <!-- <textarea
+      class="inputTool"
+      [(ngModel)]="userInputs[questionIndex]"
+      (keyup)="
+        fetchSuggestions(userInputs[questionIndex], $event);
+        updateCursorLocation($event);
+        onKeyDown($event)
+      "
+    ></textarea> -->
+    <iframe height="500px" width="100%" src="https://www.google.com/intl/ta/inputtools/try/"></iframe>
+    <!-- <iframe height="800px" width="100%"  src="https://www.quillpad.in/editor.html?utm_source=editor&utm_medium=web&utm_campaign=maximizeEditor"></iframe> -->
+    <!-- <iframe #myFrame src="https://www.google.com/intl/ta/inputtools/try/" style="height: 500px; width: 100%"></iframe>
+<p>Click the "Try it" button to hide the first H1 element in the iframe (another document).</p>
+<button (click)="hideH1()">Try it</button> -->
+
+<!-- 
+    <div class="inputTool-iframe">
+      <ng-container  *ngFor="let question of questions; let i = index">
+        <ng-container *ngIf="questionIndex === i">
+          <iframe height="500px" width="100%" src="https://input-tool.netlify.app/"></iframe>
+        </ng-container>
+      </ng-container>
+    </div> -->
+
+    <!-- <iframe height="500px" width="100%" srcdoc='
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <style>
+        body {
+          margin: 0;
+          padding: 0;
+        }
+        #content-container {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          border: none;
+        }
+      </style>
+    </head>
+    <body>
+      <div id="content-container">
+        <iframe height="100%" width="100%" sandbox="allow-scripts" src="https://www.google.com/intl/ta/inputtools/try/"></iframe>
+      </div>
+    </body>
+  </html>
+'></iframe> -->
+
+    <!-- <iframe src="../../assets/ai4bharat-transliteration/index.html"></iframe> -->
+
+
+    <ul
+      class="suggestion-Container"
+      *ngIf="showSuggestions"
+      [style.left.px]="cursorLocation.x"
+      [style.top.px]="cursorLocation.y"
+    >
+      <li
+        class="suggestion"
+        *ngFor="let suggestion of suggestions"
+        (click)="applySuggestion(suggestion)"
+      >
+        {{ suggestion }}
+      </li>
+    </ul>
+
+    <div class="button-container">
+      <img *ngIf="questionIndex !== 0" (click)="previousQuestion()" src="../../assets/images/back-button.svg" alt="back-button">
+      <img *ngIf="questionIndex !== questions.length - 1" (click)="nextQuestion()" src="../../assets/images/next-button.svg" alt="next-button">
+    </div>
+    
+  </div>
+  <h5 class="question-index">Question: {{questionIndex+1}} of 3 questions</h5>
+  
+</div>

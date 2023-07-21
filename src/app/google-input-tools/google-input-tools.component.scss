@@ -1,0 +1,63 @@
+.questions {
+  // margin-left: 25px;
+  margin-bottom: 10px;
+}
+
+.inputTool {
+  height: 200px;
+  width: 100%;
+  margin-left: -20px;
+}
+
+li.highlight {
+  background-color: yellow;
+  font-weight: bold;
+}
+
+.container {
+  position: relative;
+}
+
+.suggestion-Container {
+  position: absolute;
+  top: 100%; /* Position the suggestion list below the input */
+  left: 0;
+  z-index: 1; /* Ensure the suggestion list appears above other elements */
+  background-color: #fff; /* Set the background color of the suggestion list */
+  border: 1px solid #ccc; /* Add a border to the suggestion list */
+  list-style-type: none; /* Remove bullet points from the suggestion list */
+  padding: 0;
+  margin: 0;
+}
+
+.suggestion {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.suggestion:hover {
+  background-color: rgba(
+    253,
+    253,
+    147,
+    0.991
+  ); /* Change background color on hover */
+  font-weight: 600;
+}
+
+.button-container {
+  display: flex;
+  justify-content: end;
+}
+.button-container > img {
+  cursor: pointer;
+  padding: 10px;
+}
+.question-index {
+  text-align: center;
+}
+
+
+.inputTool-iframe{
+  margin-left: -20px;
+}

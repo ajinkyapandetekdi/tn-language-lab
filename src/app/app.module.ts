@@ -2,15 +2,11 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER, LOCALE_ID } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { AppRoutingModule } from './app-routing.module';
-
 import { LayoutModule } from './views/layout/layout.module';
 // import { AuthGuard } from './core/guard/auth.guard';
-
 import { AppComponent } from './app.component';
 // import { ErrorPageComponent } from './views/pages/error-page/error-page.component';
-
 import { DataService } from './core/services/data.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -33,9 +29,9 @@ import {
   defaultInterpolationFormat,
 } from 'angular-i18next';
 
-import en from "../locales/en/translation.json"
+import en from "../locales/en/translation.json";
 import ta from "../locales/ta/translation.json";
-import { LoginComponent } from './login/login.component'
+import { LoginComponent } from './login/login.component';
 
 export function appInit(i18next: ITranslationService) {
   let lang = localStorage.getItem('lang');

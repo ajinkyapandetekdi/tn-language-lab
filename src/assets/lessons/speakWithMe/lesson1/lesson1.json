@@ -4,6 +4,7 @@
   "data": [
     {
         "type": "iframe",
-        "content": "/assets/sb-all/index.html#/proto3/all?source=/assets/sb-all/db/proto3.json"
+        "content": "/assets/sb-all/index.html#/proto3/all?source=/assets/db/hi/proto3.json"
+   
     }
 ]}

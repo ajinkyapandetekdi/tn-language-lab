@@ -22,11 +22,17 @@
 
       </video>
     </section>
+    <!-- This comes under Think and Write -->
 
-    <section *ngIf="item.type == 'h5p'" [innerHTML]="getH5pHtml(item.content)| safe: 'html'">
-    </section>
-    <section *ngIf="item.type == 'googleInput'"><div style="text-align: center;"><a style="font-size: large;" target="_blank" href="https://www.google.com/intl/ta/inputtools/try/ ">Click here to type in Tamil - தமிழில் தட்டச்சு செய்ய இங்கே கிளிக் செய்யவும்</a>
-    </div></section>
+    <!-- <section *ngIf="item.type == 'h5p'" [innerHTML]="getH5pHtml(item.content)| safe: 'html'">
+    </section> -->
+    
+    <section *ngIf="item.type == 'googleInput'">
+      <!-- <div style="text-align: center;"><a style="font-size: large;" target="_blank" href="https://www.google.com/intl/ta/inputtools/try/ ">Click here to type in Tamil - தமிழில் தட்டச்சு செய்ய இங்கே கிளிக் செய்யவும்</a> -->
+        <!-- </div> -->
+       
+        <app-google-input-tools></app-google-input-tools>
+  </section>
 
     <section *ngIf="item.type == 'iframe'">
       <iframe allow="microphone" scrolling="no" width=100%; height="600;" allow="microphone" [src]="item.content | safe: 'resourceUrl'"></iframe>

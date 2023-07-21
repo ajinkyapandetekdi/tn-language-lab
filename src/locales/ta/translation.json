@@ -45,9 +45,10 @@
   "HOME_PARENT_OF_SUJITHRA_CLASS_IX": "சுஜித்ராவின் பெற்றோர், ஒன்பதாம் வகுப்பு",
   "HOME_PARTNERS": "பங்குதாரர்கள்",
   "HOME_TNSCERT_PARTNERS_WITH": "உடன் TNSCERT பங்குதாரர்கள்",
-  "USER_PASSWORD":"Password",
-  "USER_LOGIN":"Login",
-  "USER_CONTINUE_AS_GUEST":"Continue as Guest",
-  "COMMON_LOGIN_TO":"Login to",
+  "USER_USERNAME":"பயனர் பெயர்",
+  "USER_PASSWORD":"கடவுச்சொல்",
+  "USER_LOGIN":"உள்நுழைய",
+  "USER_CONTINUE_AS_GUEST":"விருந்தினராக தொடரவும்",
+  "COMMON_LOGIN_TO":"உள்நுழைய",
   "COMMON_MOZHIGAL":"MOZHIGAL"
 }

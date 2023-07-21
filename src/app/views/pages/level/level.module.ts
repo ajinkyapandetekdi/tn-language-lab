@@ -8,7 +8,7 @@ import {AccordionModule} from 'primeng/accordion';
 import {PanelModule} from 'primeng/panel';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import {RadioButtonModule} from 'primeng/radiobutton';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import {DragDropModule} from 'primeng/dragdrop';
 import { WordplayComponent } from './level-viewpart/wordplay/wordplay.component';
 import { OpenStoryComponent } from './level-viewpart/open-story/open-story.component';
@@ -18,7 +18,8 @@ import { ThinkAndWriteComponent } from './level-viewpart/think-and-write/think-a
 import { WordHelpComponent } from './level-viewpart/word-help/word-help.component';
 import { ViewLessonComponent } from './level-viewpart/view-lesson/view-lesson.component';
 import { SafePipe } from '../../../safePipe';
-
+import { GoogleInputToolsComponent } from 'src/app/google-input-tools/google-input-tools.component';
+FormsModule
 
 
 const routes: Routes = [
@@ -48,8 +49,8 @@ const routes: Routes = [
     ThinkAndWriteComponent,
     WordHelpComponent,
     ViewLessonComponent,
-    SafePipe
-
+    SafePipe,
+GoogleInputToolsComponent
   ],
   imports: [
     CommonModule,
@@ -59,6 +60,7 @@ const routes: Routes = [
     RadioButtonModule,
     PanelMenuModule,
     DragDropModule,
+    FormsModule,
     RouterModule.forChild(routes),
   ],
   exports:[SafePipe]
