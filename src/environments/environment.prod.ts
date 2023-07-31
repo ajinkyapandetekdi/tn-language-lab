@@ -13,7 +13,7 @@ export const environment = {
       ver: "0.3.0"// Optional. version number of the build
     },
     // host: "https://telemetry.theall.ai",
-    host: "http://65.1.91.4:9001",
+    host: "https://contribute.tnschools.gov.in",
     env: "languagelab.portal", // Required. Unique environment where the event has occured.
     apislug: "/v1/",
     endpoint: 'telemetry'
