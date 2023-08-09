@@ -12,12 +12,12 @@
       <div class="col-md-3 offset-md-3">
         <div class="row">
           <div class="col-md-6">
-            <label class="form-label">
+            <label class="form-label" style="color: white;">
               {{userService.getUser()?.student_name || 'Guest User'}}/{{userService.getUser()?.emis_username || 'Anonymous'}}
             </label>
           </div>
           <div class="col-md-6">
-            <button class="px-3 py-2 rounded bg-primary border-0 text-white fs-10 mt-1" (click)="telemetryService.interact('logout', 'level'); logout()">Logout</button>
+            <button class="px-3 py-2 rounded bg-primary border-0 text-white fs-10 mt-1" (click)="telemetryService.interact('logout', 'level','NT'); logout()">Logout</button>
           </div>
         </div>
       </div>
