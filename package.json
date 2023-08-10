@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build-dev":"ng build --configurations=staging",
+    "build-dev":"ng build --configuration=staging",
     "build-player": "node copyContentPlayer.js",
     "watch": "ng build --watch",
     "test": "ng test",
