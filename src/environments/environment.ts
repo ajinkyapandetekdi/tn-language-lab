@@ -12,7 +12,7 @@ export const environment = {
       pid: "languagelab.portal.portal", // Optional. In case the component is distributed, then which instance of that component
       ver: "0.3.0"// Optional. version number of the build
     },
-    host: "https://telemetry.theall.ai",
+    host: "https://telemetry-dev.theall.ai",
     env: "languagelab.portal", // Required. Unique environment where the event has occured.
     apislug: "/v1/",
     endpoint: 'telemetry'
