@@ -97,8 +97,8 @@
           required
         />
       </div> -->
-      <button (click)="login()" type="submit">{{ 'USER_LOGIN' | i18next }}</button>
-      <button (click)="loginAsGuest()" class="login-via-mobile">{{ 'USER_CONTINUE_AS_GUEST' | i18next }}</button>
-    </form>
+        <button type="submit" (click)='login()'>{{ 'USER_LOGIN' | i18next }}</button>
+        <button (click)="loginAsGuest()" class="login-via-mobile">{{ 'USER_CONTINUE_AS_GUEST' | i18next }}</button>
+      </form>
   </div>
 </div>

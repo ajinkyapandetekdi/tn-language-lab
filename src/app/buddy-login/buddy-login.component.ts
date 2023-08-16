@@ -1,17 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { TelemetryService } from '../telemetry.service';
 import { environment } from 'src/environments/environment';
 import { UserService } from '../user/user.service';
 import { Location } from '@angular/common';
+import jwt_decode from 'jwt-decode';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  selector: 'app-buddy-login',
+  templateUrl: './buddy-login.component.html',
+  styleUrls: ['./buddy-login.component.scss']
 })
-export class LoginComponent {
+export class BuddyLoginComponent implements OnInit {
   email: string;
   password: string;
   errorMessage: string;
@@ -21,36 +22,33 @@ export class LoginComponent {
   lockSVG = '../../assets/images/eye.svg';
   eyeSVG = '../../assets/images/password.svg';
 
-  constructor(
-    public userService: UserService,
+  constructor(public userService: UserService,
     public telemetryService: TelemetryService,
     private authService: AuthService,
     private router: Router,
-    private location: Location
-  ) {}
+    private location: Location) { }
 
   ngOnInit() {
-    this.telemetryService.impression('Login', '/login', 'ET');
+    this.telemetryService.impression('BuddyLogin', '/buddy-login', 'ET');
   }
-  loginAsGuest() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('buddyToken');
-    this.telemetryService.interact('LoginAsGuest', 'Login', 'NT');
-    localStorage.setItem('guestUser', 'true');
-    window.location.href = '/level';
-  }
+
+  loginAsBuddy() {
+    this.telemetryService.interact('Submit', 'BuddyLogin', 'NT');
+    if(this.userService.getUser().emis_username === this.email)
+    {
+      alert("User Already Exists");
+      return;
+    }
     
-  login() {
-    this.telemetryService.interact('Submit', 'Login', 'NT');
     this.authService.login(this.email, this.password).subscribe(
       (data) => {
         if (data.dataStatus) {
-          localStorage.setItem('token', data?.records?.token);
-          let users = this.userService.getUser();
+          localStorage.setItem('buddyToken', data?.records?.token);
+          let users = this.userService.getBuddyUser();
           this.telemetryService.log(
             'api_login_call',
             'Successfully logged in',
-            'login',
+            'BuddyLogin',
             users,
             'ET'
           );
@@ -67,7 +65,6 @@ export class LoginComponent {
             },
             'DT'
           );
-          // alert(data.message)
           this.loginError = true;
         }
       },
@@ -99,4 +96,5 @@ export class LoginComponent {
   togglePasswordVisibility() {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
+
 }

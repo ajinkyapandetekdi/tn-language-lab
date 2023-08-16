@@ -1,8 +1,9 @@
-name: Mozhigal Dev Deployment
+name: Mozhigal Dev Deployment for hotfix-branch
 
 on:
   push:
     branches:
+      - release-0.3.1-hotfix
       - Mozhigal-2.0
 
 jobs:
@@ -32,7 +33,7 @@ jobs:
       - name: Build and Package Application
         run: |
           npm install
-          npm run build
+          npm run build-dev
 
       - name: Deploy to S3 Bucket
         run: |

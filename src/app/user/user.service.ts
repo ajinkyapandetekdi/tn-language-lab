@@ -5,6 +5,7 @@ import jwt_decode from 'jwt-decode';
 })
 export class UserService {
   userData: any;
+  buddyUserData: any;
   constructor() { }
 
   getUser() {
@@ -17,4 +18,20 @@ export class UserService {
       return false;
     }
   }
+
+  getBuddyUser() {
+    const token2 = localStorage.getItem('buddyToken')
+    if (!!token2) {
+      this.buddyUserData = jwt_decode(token2);
+      return this.buddyUserData;
+    } else {
+      return false;
+    }
+  }
+
+  isBuddyLoggedIn()
+  {
+    return !!localStorage.getItem('buddyToken')? true : false;
+  }
+
 }

@@ -19,6 +19,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('buddyToken');
     localStorage.removeItem('guestUser');
   }
 

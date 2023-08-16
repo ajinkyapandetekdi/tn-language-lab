@@ -11,9 +11,14 @@ import { ComingComponent } from './views/pages/coming/coming.component';
 import { LearnTommorowComponent } from './views/pages/learn-tommorow/learn-tommorow.component';
 import { DownloadTelemetryComponent } from './download-telemetry/download-telemetry.component';
 import { LoginComponent } from './login/login.component';
+import { BuddyLoginComponent } from './buddy-login/buddy-login.component';
 
 const routes: Routes = [
   { path:'login', component: LoginComponent },
+  { 
+    path:'buddy-login',
+    component: BuddyLoginComponent,
+  },
   {
     path: '',
     component: BaseComponent,

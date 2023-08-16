@@ -35,7 +35,8 @@ import {
 
 import en from "../locales/en/translation.json"
 import ta from "../locales/ta/translation.json";
-import { LoginComponent } from './login/login.component'
+import { LoginComponent } from './login/login.component';
+import { BuddyLoginComponent } from './buddy-login/buddy-login.component'
 
 export function appInit(i18next: ITranslationService) {
   let lang = localStorage.getItem('lang');
@@ -88,6 +89,7 @@ export const I18N_PROVIDERS = [
     LearnTommorowComponent,
     DownloadTelemetryComponent,
     LoginComponent,
+    BuddyLoginComponent,
   ],
   imports: [
     BrowserModule,
