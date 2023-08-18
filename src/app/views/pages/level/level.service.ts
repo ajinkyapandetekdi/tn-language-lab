@@ -54,13 +54,13 @@ export class LevelService {
   getLesson(basePath,lessonId){
     this.currentLessonData = {lid: lessonId, pid: basePath};
     this.telemetryService.impression("level", this._router.url,"ET");
-    console.log(lessonId);
+   // console.log(lessonId);
     localStorage.setItem("basePath", JSON.stringify(basePath));
     localStorage.setItem("lessonId", JSON.stringify(lessonId));
     this.getJson(basePath, lessonId).subscribe(res =>
       this.lessonData = res
     );
-    console.log(this.lessonData);
+   // console.log(this.lessonData);
     return this.lessonData;
   }
 
