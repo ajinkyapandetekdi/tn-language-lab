@@ -302,7 +302,7 @@ export class LevelSidemenuComponent implements OnInit {
    // this.levelService.getLesson("speakWithMe", "lesson1")
 
     setTimeout(function () {
-      console.log(instance.levelService.nextLessonData);
+     // console.log(instance.levelService.nextLessonData);
     }, 2000)
   }
 
