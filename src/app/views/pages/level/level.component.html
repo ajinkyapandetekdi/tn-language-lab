@@ -51,7 +51,7 @@
             <app-view-lesson [lessonData]="levelService?.lessonData"></app-view-lesson>
           </div>
           <div class="text-center">
-            <button class="px-5 py-3 rounded bg-primary border-0 text-white fs-4 mt-5" (click)="levelService.playNextLesson(); telemetryService.interact('next-button', 'level')" *ngIf="levelService?.lessonData">Next</button>
+            <button class="px-5 py-3 rounded bg-primary border-0 text-white fs-4 mt-5 mb-4" (click)="levelService.playNextLesson(); telemetryService.interact('next-button', 'level')" *ngIf="levelService?.lessonData">Next</button>
             <button class="px-5 py-3 rounded bg-primary border-0 text-white fs-4 mt-5" (click)="levelService.playNextLesson()" *ngIf="!levelService?.lessonData">Start</button>
           </div>
             <!-- <app-level-viewpart></app-level-viewpart> -->
@@ -62,34 +62,37 @@
     </div>
 </div>
 <footer>
-  <div class="footer-level-img footer" style="position:relative!important">
-    <div class="content">
-      <h6>
-        A lot of work has gone into making the Mozhigal lesson content.
-        <br> We have also used resources from many different places.
-      </h6>
-      <br><br>
-      <h6>
-        To view the sources who have inspired the content and who have <br>created the lessons and the activities for
-        Level 1,
-        please <a
-          href="https://clixplatform.tiss.edu/eb-unit0-english-beginner/course/activity_player/5a7d3ff769602a01579b0aa5/5a8b97b569602a01579eba4d/"
-          target="_blank">Click here.</a>
-      </h6>
-      <br><br>
-      <h6>
-        To view the sources who have inspired the content and who have <br>created the lessons and the activities for
-        Level 2, please <a
-          href="https://clixplatform.tiss.edu/eb-unit1-english-beginner/course/activity_player/5a8b9b9c69602a0154bd46d4/5a8b9b2369602a01579ebaf2/"
-          target="_blank">Click here.</a>
-      </h6>
-      <div style="margin-top: 10px;">
-        <span style="color: white;">Visitors Counter: </span>
-        <!-- hitwebcounter Code START -->
-        <a href="https://www.hitwebcounter.com" target="_blank">
-        <img src="https://hitwebcounter.com/counter/counter.php?page=8417830&style=0006&nbdigits=1&type=ip&initCount=0" title="Free Counter" Alt="web counter"   border="0" /></a>
-        <div>Device Id: {{this.logService.getFingerPrintJsId()?.result}}</div>
-      </div>
+  <div class="footer-level-img footer">
+    <div class="container">
+      <div class="row pt-5">
+        <div class="col-lg-4 offset-lg-8 content">
+          <h6>
+            A lot of work has gone into making the Mozhigal lesson content.
+            <br> We have also used resources from many different places.
+          </h6>
+          <h6 class="mt-4">
+            To view the sources who have inspired the content and who have <br>created the lessons and the activities for
+            Level 1,
+            please <a
+              href="https://clixplatform.tiss.edu/eb-unit0-english-beginner/course/activity_player/5a7d3ff769602a01579b0aa5/5a8b97b569602a01579eba4d/"
+              target="_blank">Click here.</a>
+          </h6>
+          <h6 class="mt-4">
+            To view the sources who have inspired the content and who have <br>created the lessons and the activities for
+            Level 2, please <a
+              href="https://clixplatform.tiss.edu/eb-unit1-english-beginner/course/activity_player/5a8b9b9c69602a0154bd46d4/5a8b9b2369602a01579ebaf2/"
+              target="_blank">Click here.</a>
+          </h6>
+          <div class="mt-4">
+            <span style="color: white;">Visitors Counter: </span>
+            <!-- hitwebcounter Code START -->
+            <a href="https://www.hitwebcounter.com" target="_blank">
+            <img src="https://hitwebcounter.com/counter/counter.php?page=8417830&style=0006&nbdigits=1&type=ip&initCount=0" title="Free Counter" Alt="web counter"   border="0" /></a>
+            <div>Device Id: {{this.logService.getFingerPrintJsId()?.result}}</div>
+          </div>
+        </div>
+        
+    </div>
   </div>
   </div>
 </footer>

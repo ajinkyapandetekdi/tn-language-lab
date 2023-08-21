@@ -1,44 +1,61 @@
 <header>
   <div class="container">
-      <nav class="navbar navbar-expand-lg">
-          <div class="container-fluid">
-              <img class="img-fluid mt-2" width="59px" height="59px" src="../../../../assets/home-asset/header-round.png" alt="">
-              <img class="img-fluid" height="64px" width="162.77px" src="../../../../assets/home-asset/header_logo.png" alt="header-logo">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon">
-                  <i class="bi bi-list"></i>
-              </span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <div class="navbar-nav ms-auto">
-                  <a class="nav-link active me-4 fs-14 fw-700" aria-current="page" href="">Home</a>
-                  <a class="nav-link active me-4 fs-14 fw-700" aria-current="page" href="home/#lear-for-tomorrow">Lets Learn</a>
-                    <a class="nav-link active me-4 fs-14 fw-700" aria-current="page" href="home/#boost-learning">Lets Play</a>
-                  <a class="nav-link me-4 fs-14 fw-700 parent"  href="">About
-                      <ul class="sub-menu">
-                          <li>
-                              <a class="nav-link me-4 fs-14 fw-700" routerLink="/learn-tommorow" href="">Learn for Tomorrow</a>
-                          </li>
-                          <li>
-                              <a class="nav-link me-4 fs-14 fw-700" routerLink="/research" href="">Research</a>
-                          </li>
-                      </ul>
-                  </a>
-                  <a routerLink="/level" class="nav-link me-4 fs-14 fw-700 d-none"  href="">Language Lab</a>
-                  <a class="nav-link me-4 fs-14 fw-700 d-none"  href="">Explore</a>
-                  <a class="nav-link fs-14 fw-700" id="eng">Eng &nbsp; /</a>
-                  <a class="nav-link me-4 fs-14 fw-700" id="de">
-                      தமிழ்</a>
-                  <a routerLink="/level" class="nav-link fs-14 fw-700 text-pink header-btn" href="">LOGIN</a>
-              </div>
-            </div>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <img class="img-fluid mt-2" width="59px" height="59px" src="../../../../assets/home-asset/header-round.png"
+          alt="">
+        <img class="img-fluid" height="64px" width="162.77px" src="../../../../assets/home-asset/header_logo.png"
+          alt="header-logo">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon">
+            <i class="bi bi-list"></i>
+          </span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <div class="navbar-nav ms-auto">
+            <a class="nav-link active me-4 fs-14 fw-700" aria-current="page" href="">Home</a>
+            <a class="nav-link active me-4 fs-14 fw-700" aria-current="page" href="home/#lear-for-tomorrow">Lets
+              Learn</a>
+            <a class="nav-link active me-4 fs-14 fw-700" aria-current="page" href="home/#boost-learning">Lets Play</a>
+            <a class="nav-link me-4 fs-14 fw-700 parent" href="">About
+              <ul class="sub-menu">
+                <li>
+                  <a class="nav-link me-4 fs-14 fw-700" routerLink="/learn-tommorow" href="">Learn for Tomorrow</a>
+                </li>
+                <li>
+                  <a class="nav-link me-4 fs-14 fw-700" routerLink="/research" href="">Research</a>
+                </li>
+              </ul>
+            </a>
+            <a routerLink="/level" class="nav-link me-4 fs-14 fw-700 d-none" href="">Language Lab</a>
+            <a class="nav-link me-4 fs-14 fw-700 d-none" href="">Explore</a>
+            <a class="nav-link fs-14 fw-700" id="eng">Eng &nbsp; /</a>
+            <a class="nav-link me-4 fs-14 fw-700" id="de">
+              தமிழ்</a>
+            <a routerLink="/level" class="nav-link fs-14 fw-700 text-pink header-btn" href="">LOGIN</a>
           </div>
-        </nav>
+        </div>
+      </div>
+    </nav>
 
   </div>
 </header>
-
-    <div class="container">
-        <div class="text-blue fs-34 fw-700 mt-5">Coming Soon</div>
+<div class="container d-flex align-items-center justify-content-center center-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="text-blue fs-34 fw-700 mt-5">
+        Coming Soon...
+      </div>
     </div>
+  </div>
+</div>
 
+<footer class="footer-blue">
+  <span style="color:white">Visitors Counter: </span>
+  <!-- hitwebcounter Code START -->
+  <a href="https://www.hitwebcounter.com" target="_blank">
+    <img src="https://hitwebcounter.com/counter/counter.php?page=8417830&style=0006&nbdigits=1&type=ip&initCount=0"
+      title="Free Counter" Alt="web counter" border="0" /></a>
+  <div>Device Id: {{this.logsService.getFingerPrintJsId()?.result}}</div>
+</footer>
