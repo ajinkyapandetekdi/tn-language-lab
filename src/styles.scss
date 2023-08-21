@@ -634,10 +634,9 @@ th[sortable].desc:after {
 .footer-level-img{
   margin-top: 50px;
   background-image: url(./assets/home-asset/level-footer.png);
-  height: 515px;
+  height: 470px;
   background-repeat: no-repeat;
-  background-size: cover;
-  background-position: left;
+  background-size: cover; 
 }
 
 .sidepanel .pi-chevron-right:before, .sidepanel .pi-angle-right:before {
@@ -694,9 +693,17 @@ th[sortable].desc:after {
   font-size: 14px;
 }
 @media (max-width: 991px){
-.page-wrapper {
-    margin-top: 0px !important;
-}
+  .page-wrapper {
+      margin-top: 0px !important;
+  }
+  .footer-level-img {
+    background:#662D91;
+    padding-top:2rem;
+    height:450px;
+  }
+  .content{
+    margin-top:0rem !important;;
+  }
 }
 .p-panelmenu .p-panelmenu-header.p-highlight a {
   position: relative !important;
