@@ -1,6 +1,8 @@
-import { Component, ElementRef, Input, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Location, LocationStrategy } from '@angular/common';
+import { UserService } from 'src/app/user/user.service';
+import { LevelService } from '../../level.service';
 
 @Component({
   selector: 'app-view-lesson',
@@ -8,7 +10,7 @@ import { Location, LocationStrategy } from '@angular/common';
   styleUrls: ['./view-lesson.component.scss']
 })
 export class ViewLessonComponent implements OnInit {
-  @Input() lessonData
+  @Input() lessonData;
   modelAnsSwitch:boolean;
   option1Selected: boolean;
   option2Selected: boolean;
@@ -19,22 +21,24 @@ export class ViewLessonComponent implements OnInit {
 
 
   lessonProgress: number = 0; // Current lesson progress value
-  totalQuestions: number = 4; // Total number of questions
 
-  constructor(private sanitizer: DomSanitizer, private location: Location, private locationStrategy: LocationStrategy) { }
+  constructor(public levelService:LevelService, public userService: UserService ,private sanitizer: DomSanitizer, private location: Location, private locationStrategy: LocationStrategy) { }
 
   ngOnInit(): void {
     window.addEventListener('message', (event: MessageEvent) => {
-      if (event.data === 'start-recording') {
-        this.updateLessonProgress();
+      if (event.data === 'start-recording' || event.data === 'stop-recording') {
+        this.updateLessonProgress(0.5);
       }
     });
   }
 
-
-  updateLessonProgress() {
-    this.lessonProgress = this.lessonProgress+1;
+  updateLessonProgress(scoreIncrement: number) {
+    scoreIncrement = scoreIncrement ? scoreIncrement : 0.5;
+    const lessonIdentifier = this.levelService.currentLessonData.lid+this.levelService.currentLessonData.pid;
+    this.levelService.saveScore(lessonIdentifier, scoreIncrement);
   }
+
+
 
   switchModelAnswer(option){
     if(option === 'option1'){

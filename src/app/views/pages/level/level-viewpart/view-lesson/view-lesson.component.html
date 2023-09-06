@@ -1,9 +1,9 @@
 <div *ngIf="lessonData">
   <h4 class="rounded bg-light py-3 px-4">
     {{lessonData?.title}}
-    <span class="lesson-progress">[{{lessonProgress}}/{{totalQuestions}}]</span>
+    <span class="lesson-progress">Points: {{levelService.currentLessonScoreCount}}</span>
   </h4>
-  <app-lesson-progress *ngIf="lessonData.progressArray" [progress]="lessonProgress" [questionCount]="totalQuestions"></app-lesson-progress>
+  <app-lesson-progress [progress]="lessonProgress"></app-lesson-progress>
 
   <div *ngFor="let item of lessonData.data;">
     <section *ngIf="item.type == 'html'" [innerHTML]="item.content">
@@ -204,7 +204,7 @@
             </div>
           </ng-container>
         </div>
-        <section (click)="updateLessonProgress()">
+        <section>
           <iframe allow="microphone" width=100%; [src]="'lets-talk/Open Story.html' | safe: 'resourceUrl'"></iframe>
         </section>
       </div>

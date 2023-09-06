@@ -158,7 +158,7 @@ function startAudioRecording() {
 /** Stop the currently started audio recording & sends it
  */
 function stopAudioRecording() {
-
+  window.parent.postMessage('stop-recording', '*')
     console.log("Stopping Audio Recording...");
 
     //stop the recording using the audio recording API
