@@ -26,6 +26,7 @@ export class ViewLessonComponent implements OnInit {
 
   ngOnInit(): void {
     
+    
     window.addEventListener('message', (event: MessageEvent) => {      
       if(event.data && event.data?.message === "all-app-score"){
         const myScore = event.data.score     
