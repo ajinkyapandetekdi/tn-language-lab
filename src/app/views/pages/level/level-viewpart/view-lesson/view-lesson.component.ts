@@ -25,7 +25,13 @@ export class ViewLessonComponent implements OnInit {
   constructor(public levelService:LevelService, public userService: UserService ,private sanitizer: DomSanitizer, private location: Location, private locationStrategy: LocationStrategy) { }
 
   ngOnInit(): void {
-    window.addEventListener('message', (event: MessageEvent) => {
+    
+    window.addEventListener('message', (event: MessageEvent) => {      
+      if(event.data && event.data?.message === "all-app-score"){
+        const myScore = event.data.score     
+        const lessonIdentifier = this.levelService.currentLessonData.lid+this.levelService.currentLessonData.pid;
+        this.levelService.saveScore(lessonIdentifier, myScore);
+      }
       if (event.data === 'start-recording' || event.data === 'stop-recording') {
         this.updateLessonProgress(0.5);
       }
