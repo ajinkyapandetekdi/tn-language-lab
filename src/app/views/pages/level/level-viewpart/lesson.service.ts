@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LessonService {
-  private baseUrl = 'https://www.telemetry-dev.theall.ai';
+  private baseUrl = environment.telemetryContext.host;
 
   constructor(private http: HttpClient) {}
 

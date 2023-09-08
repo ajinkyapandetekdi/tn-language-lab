@@ -19,16 +19,15 @@ export class ViewLessonComponent implements OnInit {
 
   @ViewChild('iframe1') iframe1: ElementRef;
 
-
   lessonProgress: number = 0; // Current lesson progress value
 
   constructor(public levelService:LevelService, public userService: UserService ,private sanitizer: DomSanitizer, private location: Location, private locationStrategy: LocationStrategy) { }
 
   ngOnInit(): void {
-    
-    window.addEventListener('message', (event: MessageEvent) => {      
+
+    window.addEventListener('message', (event: MessageEvent) => {
       if(event.data && event.data?.message === "all-app-score"){
-        const myScore = event.data.score     
+        const myScore = event.data.score
         const lessonIdentifier = this.levelService.currentLessonData.lid+this.levelService.currentLessonData.pid;
         this.levelService.saveScore(lessonIdentifier, myScore);
       }

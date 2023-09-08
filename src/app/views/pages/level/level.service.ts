@@ -18,7 +18,7 @@ export class LevelService {
   userData: any;
   currentLessonScoreCount: number = 0;
   currentLessonData: any;
-  nextLessonData: any[] = [];;
+  nextLessonData: any[] = [];
   nextLessonPath = '';
   nextLessonId =  '';
   lessonPoint: number = 0;
