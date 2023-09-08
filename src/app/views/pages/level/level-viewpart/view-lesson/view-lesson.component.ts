@@ -27,7 +27,7 @@ export class ViewLessonComponent implements OnInit {
 
     window.addEventListener('message', (event: MessageEvent) => {
       if(event.data && event.data?.message === "all-app-score"){
-        const myScore = parseFloat(event.data.score)
+        const myScore = parseFloat(event.data.score);
         const lessonIdentifier = this.levelService.currentLessonData.lid+this.levelService.currentLessonData.pid;
         this.levelService.saveScore(lessonIdentifier, myScore);
       }

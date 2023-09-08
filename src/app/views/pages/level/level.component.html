@@ -18,15 +18,15 @@
                   <span *ngIf="isGuestUser">
                     <dl><dt>{{ userService.getUser()?.student_name || 'Guest User' }} / {{ userService.getUser()?.emis_username || 'Anonymous' }}</dt>
                       <li>Stars: {{ levelService.stars }}</li>
-                      <li style="font-size: small;">Total Points: {{ levelService.totalPoints }}</li></dl>
+                      <li style="font-size: small;">Total Points: {{ levelService.totalPoints.toFixed(2) }}</li></dl>
                   </span>
                   <div *ngIf="!isGuestUser">
                     <dl><dt>1. {{ userService.getUser()?.student_name }} / {{ userService.getUser()?.emis_username }}</dt>
-                      <li style="font-size: small;">Stars: {{ levelService.stars }} | Total Points: {{ levelService.totalPoints }}</li></dl>
+                      <li style="font-size: small;">Stars: {{ levelService.stars }} | Total Points: {{ levelService.totalPoints.toFixed(2) }}</li></dl>
                   </div>
                   <div *ngIf="isBuddyLogin; else notBuddyLogin">
                     <dl><dt>2. {{ userService.getBuddyUser()?.student_name }} / {{ userService.getBuddyUser()?.emis_username }}</dt>
-                    <li style="font-size: small;">Stars: {{ levelService.buddyStars }} | Total Points: {{ levelService.buddyTotalPoints }}</li></dl>
+                    <li style="font-size: small;">Stars: {{ levelService.buddyStars }} | Total Points: {{ levelService.buddyTotalPoints.toFixed(2) }}</li></dl>
                   </div>
                   <ng-template #notBuddyLogin>
                   </ng-template>

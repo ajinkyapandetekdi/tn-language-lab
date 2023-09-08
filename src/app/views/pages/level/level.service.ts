@@ -431,6 +431,7 @@ export class LevelService {
   }
 
   saveScore(label: string, scoreIncrement: number) {
+    scoreIncrement = +scoreIncrement.toFixed(2);
     this.lessonService.postLessonScore(this.userService.getCurrentUserId(), label, scoreIncrement).subscribe(
       (response) => {
         this.showScore();
