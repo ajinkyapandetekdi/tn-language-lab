@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import jwt_decode from 'jwt-decode';
+import { LogsService } from '../logs.service';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   userData: any;
   buddyUserData: any;
-  constructor() { }
+
+  constructor(public logService:LogsService) { }
 
   getUser() {
     const token = localStorage.getItem('token');
@@ -34,4 +36,8 @@ export class UserService {
     return !!localStorage.getItem('buddyToken')? true : false;
   }
 
+  getCurrentUserId() {
+    const userId = this.getUser()?.emis_username || 'anonymous';
+    return userId;
+  }
 }

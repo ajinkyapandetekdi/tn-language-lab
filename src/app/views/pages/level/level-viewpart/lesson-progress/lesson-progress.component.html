@@ -1,0 +1,3 @@
+<ng-container *ngIf="levelService.showFeedbackPopup">
+  <app-feedback-popup (feedbackSubmitted)="handleFeedbackSubmission($event)"></app-feedback-popup>
+</ng-container>

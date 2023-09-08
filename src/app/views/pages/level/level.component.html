@@ -12,17 +12,21 @@
       <div class="col-xl-6 col-md-6">
         <div class="row">
           <div class="d-flex justify-content-end">
-              <div class="p-2 mr-4"> 
+              <div class="p-2 mr-4">
                 <div [ngClass]="(isBuddyLogin || isGuestUser) ? 'user-active' : 'user-muted'">
                 <label class="form-label" style="color: white;">
                   <span *ngIf="isGuestUser">
-                      {{userService.getUser()?.student_name || 'Guest User'}}/{{userService.getUser()?.emis_username || 'Anonymous'}}
+                    <dl><dt>{{ userService.getUser()?.student_name || 'Guest User' }} / {{ userService.getUser()?.emis_username || 'Anonymous' }}</dt>
+                      <li>Stars: {{ levelService.stars }}</li>
+                      <li style="font-size: small;">Total Points: {{ levelService.totalPoints }}</li></dl>
                   </span>
                   <div *ngIf="!isGuestUser">
-                    1. {{ userService.getUser()?.student_name }} / {{ userService.getUser()?.emis_username }}
+                    <dl><dt>1. {{ userService.getUser()?.student_name }} / {{ userService.getUser()?.emis_username }}</dt>
+                      <li style="font-size: small;">Stars: {{ levelService.stars }} | Total Points: {{ levelService.totalPoints }}</li></dl>
                   </div>
                   <div *ngIf="isBuddyLogin; else notBuddyLogin">
-                    2. {{ userService.getBuddyUser()?.student_name }} / {{ userService.getBuddyUser()?.emis_username }}
+                    <dl><dt>2. {{ userService.getBuddyUser()?.student_name }} / {{ userService.getBuddyUser()?.emis_username }}</dt>
+                    <li style="font-size: small;">Stars: {{ levelService.buddyStars }} | Total Points: {{ levelService.buddyTotalPoints }}</li></dl>
                   </div>
                   <ng-template #notBuddyLogin>
                   </ng-template>
@@ -34,7 +38,7 @@
                 (click)="buddyLogin()">Join As Buddy</button>
             </div>
             <div class="p-2">
-              <button class="px-3 py-2 rounded bg-danger border-0 text-white fs-10 mt-1" 
+              <button class="px-3 py-2 rounded bg-danger border-0 text-white fs-10 mt-1"
                 (click)="telemetryService.interact('logout', 'level','NT'); logout()">Logout</button>
             </div>
             </div>
@@ -44,6 +48,7 @@
     </div>
   </nav>
 </header>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-9">
@@ -91,7 +96,7 @@
             <div>Device Id: {{this.logService.getFingerPrintJsId()?.result}}</div>
           </div>
         </div>
-        
+
     </div>
   </div>
   </div>

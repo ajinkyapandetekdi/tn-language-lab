@@ -1,5 +1,10 @@
 <div *ngIf="lessonData">
-  <h4 class="rounded bg-light py-3 px-4">{{lessonData?.title}}</h4>
+  <h4 class="rounded bg-light py-3 px-4">
+    {{lessonData?.title}}
+    <span class="lesson-progress">Points: {{levelService.currentLessonScoreCount}}</span>
+  </h4>
+  <app-lesson-progress [progress]="lessonProgress"></app-lesson-progress>
+
   <div *ngFor="let item of lessonData.data;">
     <section *ngIf="item.type == 'html'" [innerHTML]="item.content">
     </section>
@@ -9,13 +14,13 @@
     </section>
 
     <section *ngIf="item.type == 'audio'">
-      <audio class="w-100 mt-4" controls>
+      <audio (play)="updateLessonProgress()" class="w-100 mt-4" controls>
         <source [src]="item.content" type="audio/mpeg">
         Your browser does not support the audio element.
       </audio>
     </section>
     <section *ngIf="item.type == 'video'">
-      <video class="w-50 mx-auto mt-4 rounded" controls>
+      <video (play)="updateLessonProgress()" class="w-50 mx-auto mt-4 rounded" controls>
         <source [src]="item.content" type="video/mp4">
         <track id="track" [src]="item.subtitles" kind="subtitles" srclang="en" label="English" default />
         Your browser does not support the video element.
@@ -50,7 +55,7 @@
     </section>
 
     <section *ngIf="item.type == 'options'">
-      <div class="row">
+      <div (click)="updateLessonProgress()" class="row">
         <!-- <div class="col-md-4">
         <ng-container *ngFor="let option of item.content; let i = index">
           <div [ngClass]="!option1Selected ? 'opt-unselected' : 'opt-selected'" (click)="switchModelAnswer(i)">
@@ -88,7 +93,7 @@
                 <p>{{item.content[0].name}}</p>
               </div>
               <div *ngIf="item.content[0].audioSrc">
-                <audio class="w-100 mt-4" controls>
+                <audio (play)="updateLessonProgress()" class="w-100 mt-4" controls>
                   <source [src]="item.content[0].audioSrc" type="audio/mp3">
                   Your browser does not support the audio element.
                 </audio>
@@ -112,7 +117,7 @@
                 <p>{{item.content[1].name}}</p>
               </div>
               <div *ngIf="item.content[1].audioSrc">
-                <audio class="w-100 mt-4" controls>
+                <audio (play)="updateLessonProgress()" class="w-100 mt-4" controls>
                   <source [src]="item.content[1].audioSrc" type="audio/mp3">
                   Your browser does not support the audio element.
                 </audio>
@@ -136,7 +141,7 @@
                 <p>{{item.content[2].name}}</p>
               </div>
               <div *ngIf="item.content[2].audioSrc">
-                <audio class="w-100 mt-4" controls>
+                <audio (play)="updateLessonProgress()" class="w-100 mt-4" controls>
                   <source [src]="item.content[2].audioSrc" type="audio/mp3">
                   Your browser does not support the audio element.
                 </audio>
