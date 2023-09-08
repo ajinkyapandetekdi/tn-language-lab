@@ -13,7 +13,7 @@ export class TelemetryService {
   private context;
   public config;
   public TELEMETRY_MODE = environment.telemetry_mode;
-  
+
   startDuration: number;
 
   constructor(
@@ -189,7 +189,7 @@ export class TelemetryService {
       });
     }
   }
- 
+
 
   public feedback(data) {
     CsTelemetryModule.instance.telemetryService.raiseFeedBackTelemetry({
@@ -197,7 +197,7 @@ export class TelemetryService {
       edata: {
         "contentId": "", // Required. Id of the content
         "rating": data, // Optional. Numeric score (+1 for like, -1 for dislike, or 4.5 stars given in a rating)
-        "comments": "User entered feedback" // Optional. Text feedback (if any)
+        "comments": "User feedback" // Optional. Text feedback (if any)
       }
     });
   }
@@ -206,7 +206,7 @@ export class TelemetryService {
    const isBuddyLogin = this.userService.isBuddyLoggedIn();
     const userType = isBuddyLogin ? 'Buddy User' : 'User';
     const userId = isBuddyLogin ? this.userService.getUser().emis_username + "/" +this.userService.getBuddyUser().emis_username : this.userService.getUser().emis_username;
-    
+
     return {
       object: {},
       context: {
