@@ -37,7 +37,6 @@ export class UserService {
   }
 
   getCurrentUserId() {
-    const isBuddyLogin = this.isBuddyLoggedIn();
     const userId = this.getUser()?.emis_username || 'anonymous';
     return userId;
   }
