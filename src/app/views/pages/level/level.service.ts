@@ -323,11 +323,14 @@ export class LevelService {
     let instance = this;
     this.currentLessonData = {lid: lessonId, pid: basePath};
     this.telemetryService.impression("level", this._router.url,"ET");
+   // console.log(lessonId);
     localStorage.setItem("basePath", JSON.stringify(basePath));
     localStorage.setItem("lessonId", JSON.stringify(lessonId));
     this.getJson(basePath, lessonId).subscribe(res =>
       this.lessonData = res
     );
+   // console.log(this.lessonData);
+    return this.lessonData;
   }
 
   getStudentScore(studentId: number): Observable<number> {

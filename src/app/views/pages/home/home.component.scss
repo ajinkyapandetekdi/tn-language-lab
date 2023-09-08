@@ -75,13 +75,28 @@ body , html{
 .ms-30p{
     margin-left: 30%;
 }
-
-
+.h-135{
+height:135px;
+}
+.h-75
+{
+    height:75px;
+}
 .gap-15{
     gap: 15px;
 }
 .gap-50{
     gap: 50px;
+}
+.logo
+{
+    width:59px;
+    height:59px;
+    cursor: pointer;
+}
+.logo1{
+    width:160px;
+    cursor: pointer;
 }
 .flex-center{
     display: flex;
@@ -131,13 +146,9 @@ body , html{
     background-position: right;
     background-repeat: no-repeat;
 }
-.sizetest{
-     width:285.76px !important;
-     height:285.76px;
-}
 .test-tit{
-    font-size: 24px;
-    line-height: 39px;
+    font-size: 20px;
+    line-height: 36px;
 }
 .bg-pink{
     background: #EC297B !important;
@@ -299,7 +310,8 @@ a{
  align-items: center;
 }
 .responsive-iframe {
-   width: 50%;
+   width:900px;
+   height:600px;
 }
 .owl-theme .owl-dots .owl-dot span {
     width: 20px !important;

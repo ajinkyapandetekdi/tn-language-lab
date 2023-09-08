@@ -3,38 +3,44 @@
 </div> -->
 <header>
   <nav class="level-nav">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-6">
-          <img class="img-fluid" style="cursor: pointer;" width="59px" routerLink="/home" height="59px" src="../../../../assets/home-asset/header-round.png" alt="">
-          <img class="img-fluid ms-3" style="cursor: pointer;" height="64px"  routerLink="/home" width="162.77px" src="../../../../assets/home-asset/mozhigal_white.png" alt="header-logo">
-        </div>
-        <div class="col-md-6">
-          <div class="row">
-            <div class="col-md-4 offset-md-3" [ngClass]="(isBuddyLogin || isGuestUser) ? 'user-active' : 'user-muted'">
-              <label class="form-label" style="color: white;">
-                <span *ngIf="isGuestUser">
-                  <dl><dt>{{ userService.getUser()?.student_name || 'Guest User' }} / {{ userService.getUser()?.emis_username || 'Anonymous' }}</dt>
-                  <li>Stars: {{ levelService.stars }}</li>
-                  <li style="font-size: small;">Total Points: {{ levelService.totalPoints }}</li></dl>
-                </span>
-                <div *ngIf="!isGuestUser">
-                  <dl><dt>1. {{ userService.getUser()?.student_name }} / {{ userService.getUser()?.emis_username }}</dt>
-                  <li style="font-size: small;">Stars: {{ levelService.stars }} | Total Points: {{ levelService.totalPoints }}</li></dl>
-                </div>
-                <div *ngIf="isBuddyLogin; else notBuddyLogin">
-                  <dl><dt>2. {{ userService.getBuddyUser()?.student_name }} / {{ userService.getBuddyUser()?.emis_username }}</dt>
-                  <li style="font-size: small;">Stars: {{ levelService.buddyStars }} | Total Points: {{ levelService.buddyTotalPoints }}</li></dl>
-                </div>
-                <ng-template #notBuddyLogin>
-                </ng-template>
-              </label>
+   <div class="container-fluid">
+    <div class="row">
+      <div class="col-xl-6 col-md-6">
+        <img class="img-fluid" style="cursor: pointer;" width="59px" routerLink="/home" height="59px" src="../../../../assets/home-asset/header-round.png" alt="">
+        <img class="img-fluid ms-3" style="cursor: pointer;" height="64px"  routerLink="/home" width="162.77px" src="../../../../assets/home-asset/mozhigal_white.png" alt="header-logo">
+      </div>
+      <div class="col-xl-6 col-md-6">
+        <div class="row">
+          <div class="d-flex justify-content-end">
+              <div class="p-2 mr-4">
+                <div [ngClass]="(isBuddyLogin || isGuestUser) ? 'user-active' : 'user-muted'">
+                <label class="form-label" style="color: white;">
+                  <span *ngIf="isGuestUser">
+                    <dl><dt>{{ userService.getUser()?.student_name || 'Guest User' }} / {{ userService.getUser()?.emis_username || 'Anonymous' }}</dt>
+                      <li>Stars: {{ levelService.stars }}</li>
+                      <li style="font-size: small;">Total Points: {{ levelService.totalPoints }}</li></dl>
+                  </span>
+                  <div *ngIf="!isGuestUser">
+                    <dl><dt>1. {{ userService.getUser()?.student_name }} / {{ userService.getUser()?.emis_username }}</dt>
+                      <li style="font-size: small;">Stars: {{ levelService.stars }} | Total Points: {{ levelService.totalPoints }}</li></dl>
+                  </div>
+                  <div *ngIf="isBuddyLogin; else notBuddyLogin">
+                    <dl><dt>2. {{ userService.getBuddyUser()?.student_name }} / {{ userService.getBuddyUser()?.emis_username }}</dt>
+                    <li style="font-size: small;">Stars: {{ levelService.buddyStars }} | Total Points: {{ levelService.buddyTotalPoints }}</li></dl>
+                  </div>
+                  <ng-template #notBuddyLogin>
+                  </ng-template>
+                </label>
+              </div>
             </div>
-            <div class="col-md-5" style="text-align: right;">
-              <button class="px-3 py-2 rounded bg-success border-0 text-white fs-10 mt-1 mx-2" *ngIf="isGuestUser !== 'true' && !isBuddyLogin"
+            <div class="p-2">
+                 <button class="px-3 py-2 rounded bg-success border-0 text-white fs-10 mt-1 mx-2" *ngIf="isGuestUser !== 'true' && !isBuddyLogin"
                 (click)="buddyLogin()">Join As Buddy</button>
+            </div>
+            <div class="p-2">
               <button class="px-3 py-2 rounded bg-danger border-0 text-white fs-10 mt-1"
                 (click)="telemetryService.interact('logout', 'level','NT'); logout()">Logout</button>
+            </div>
             </div>
           </div>
         </div>
@@ -50,7 +56,7 @@
             <app-view-lesson [lessonData]="levelService?.lessonData"></app-view-lesson>
           </div>
           <div class="text-center">
-            <button class="px-5 py-3 rounded bg-primary border-0 text-white fs-4 mt-5" (click)="levelService.playNextLesson(); telemetryService.interact('next-button', 'level')" *ngIf="levelService?.lessonData">Next</button>
+            <button class="px-5 py-3 rounded bg-primary border-0 text-white fs-4 mt-5 mb-4" (click)="levelService.playNextLesson(); telemetryService.interact('next-button', 'level')" *ngIf="levelService?.lessonData">Next</button>
             <button class="px-5 py-3 rounded bg-primary border-0 text-white fs-4 mt-5" (click)="levelService.playNextLesson()" *ngIf="!levelService?.lessonData">Start</button>
           </div>
             <!-- <app-level-viewpart></app-level-viewpart> -->
@@ -61,34 +67,37 @@
     </div>
 </div>
 <footer>
-  <div class="footer-level-img footer" style="position:relative!important">
-    <div class="content">
-      <h6>
-        A lot of work has gone into making the Mozhigal lesson content.
-        <br> We have also used resources from many different places.
-      </h6>
-      <br><br>
-      <h6>
-        To view the sources who have inspired the content and who have <br>created the lessons and the activities for
-        Level 1,
-        please <a
-          href="https://clixplatform.tiss.edu/eb-unit0-english-beginner/course/activity_player/5a7d3ff769602a01579b0aa5/5a8b97b569602a01579eba4d/"
-          target="_blank">Click here.</a>
-      </h6>
-      <br><br>
-      <h6>
-        To view the sources who have inspired the content and who have <br>created the lessons and the activities for
-        Level 2, please <a
-          href="https://clixplatform.tiss.edu/eb-unit1-english-beginner/course/activity_player/5a8b9b9c69602a0154bd46d4/5a8b9b2369602a01579ebaf2/"
-          target="_blank">Click here.</a>
-      </h6>
-      <div style="margin-top: 10px;">
-        <span style="color: white;">Visitors Counter: </span>
-        <!-- hitwebcounter Code START -->
-        <a href="https://www.hitwebcounter.com" target="_blank">
-        <img src="https://hitwebcounter.com/counter/counter.php?page=8417830&style=0006&nbdigits=1&type=ip&initCount=0" title="Free Counter" Alt="web counter"   border="0" /></a>
-        <div>Device Id: {{this.logService.getFingerPrintJsId()?.result}}</div>
-      </div>
+  <div class="footer-level-img footer">
+    <div class="container">
+      <div class="row pt-5">
+        <div class="col-lg-4 offset-lg-8 content">
+          <h6>
+            A lot of work has gone into making the Mozhigal lesson content.
+            <br> We have also used resources from many different places.
+          </h6>
+          <h6 class="mt-4">
+            To view the sources who have inspired the content and who have <br>created the lessons and the activities for
+            Level 1,
+            please <a
+              href="https://clixplatform.tiss.edu/eb-unit0-english-beginner/course/activity_player/5a7d3ff769602a01579b0aa5/5a8b97b569602a01579eba4d/"
+              target="_blank">Click here.</a>
+          </h6>
+          <h6 class="mt-4">
+            To view the sources who have inspired the content and who have <br>created the lessons and the activities for
+            Level 2, please <a
+              href="https://clixplatform.tiss.edu/eb-unit1-english-beginner/course/activity_player/5a8b9b9c69602a0154bd46d4/5a8b9b2369602a01579ebaf2/"
+              target="_blank">Click here.</a>
+          </h6>
+          <div class="mt-4">
+            <span style="color: white;">Visitors Counter: </span>
+            <!-- hitwebcounter Code START -->
+            <a href="https://www.hitwebcounter.com" target="_blank">
+            <img src="https://hitwebcounter.com/counter/counter.php?page=8417830&style=0006&nbdigits=1&type=ip&initCount=0" title="Free Counter" Alt="web counter"   border="0" /></a>
+            <div>Device Id: {{this.logService.getFingerPrintJsId()?.result}}</div>
+          </div>
+        </div>
+
+    </div>
   </div>
   </div>
 </footer>
