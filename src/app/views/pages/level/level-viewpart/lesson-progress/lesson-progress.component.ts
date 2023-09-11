@@ -11,13 +11,11 @@ export class LessonProgressComponent implements OnInit {
 
   @Input() progress: number;
   @Input() questionCount: number;
-  questions: number[];
 
 
   constructor(public levelService: LevelService, public telemetryService: TelemetryService) { }
 
   ngOnInit(): void {
-    this.questions = Array(this.questionCount).fill(0);
   }
 
   handleFeedbackSubmission(feedback: string) {

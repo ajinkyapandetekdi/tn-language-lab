@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
   }
   @HostListener('document:TelemetryEvent', ['$event'])
   onTelemetryEvent(event) {
-    console.log('event===============', event);
+   // console.log('event===============', event);
   }
 
    /**

@@ -202,10 +202,20 @@ body , html{
     height: 44px !important;
     width: 47px !important;
 }
-.footer-blue{
-    height: 77.28px;
-    background: #662D91;
+.center-content {
+    min-height: calc(100vh - 15rem);
 }
+  /* Footer style */
+  .footer-blue {
+    height:4rem;
+    background: #662D91;
+    color: white;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+  }
 .shadow{
     position: absolute;
     top: 14%;

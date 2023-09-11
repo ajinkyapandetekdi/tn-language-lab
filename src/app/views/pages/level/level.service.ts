@@ -18,7 +18,7 @@ export class LevelService {
   userData: any;
   currentLessonScoreCount: number = 0;
   currentLessonData: any;
-  nextLessonData: any[] = [];;
+  nextLessonData: any[] = [];
   nextLessonPath = '';
   nextLessonId =  '';
   lessonPoint: number = 0;
@@ -323,11 +323,14 @@ export class LevelService {
     let instance = this;
     this.currentLessonData = {lid: lessonId, pid: basePath};
     this.telemetryService.impression("level", this._router.url,"ET");
+   // console.log(lessonId);
     localStorage.setItem("basePath", JSON.stringify(basePath));
     localStorage.setItem("lessonId", JSON.stringify(lessonId));
     this.getJson(basePath, lessonId).subscribe(res =>
       this.lessonData = res
     );
+   // console.log(this.lessonData);
+    return this.lessonData;
   }
 
   getStudentScore(studentId: number): Observable<number> {
@@ -428,6 +431,7 @@ export class LevelService {
   }
 
   saveScore(label: string, scoreIncrement: number) {
+    scoreIncrement = +scoreIncrement.toFixed(2);
     this.lessonService.postLessonScore(this.userService.getCurrentUserId(), label, scoreIncrement).subscribe(
       (response) => {
         this.showScore();

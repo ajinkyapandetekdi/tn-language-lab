@@ -17,9 +17,9 @@
     {
       "type": "images",
       "content": [
-        {"src": "assets/lessons/lesson5/wordplay/image/img1.jpg","name":"Picture1","width":"300","height":"300"},
-        {"src": "assets/lessons/lesson5/wordplay/image/Monsoon.jpeg","name":"Picture2","width":"300","height":"300"},
-        {"src": "assets/lessons/lesson5/wordplay/image/Winter.jpeg","name":"Picture3","width":"300","height":"300"}
+        {"src": "assets/lessons/lesson5/wordplay/image/img1.jpg","name":"Picture1","width":"420","height":"300" },
+        {"src": "assets/lessons/lesson5/wordplay/image/Monsoon.jpeg","name":"Picture2","width":"420","height":"300"},
+        {"src": "assets/lessons/lesson5/wordplay/image/Winter.jpeg","name":"Picture3","width":"420","height":"300"}
         ]
     },
     {
