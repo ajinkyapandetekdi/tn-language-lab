@@ -8,7 +8,7 @@ import {AccordionModule} from 'primeng/accordion';
 import {PanelModule} from 'primeng/panel';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import {RadioButtonModule} from 'primeng/radiobutton';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {DragDropModule} from 'primeng/dragdrop';
 import { WordplayComponent } from './level-viewpart/wordplay/wordplay.component';
 import { OpenStoryComponent } from './level-viewpart/open-story/open-story.component';
@@ -57,6 +57,7 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
+    FormsModule,
     AccordionModule,
     PanelModule,
     ReactiveFormsModule,
