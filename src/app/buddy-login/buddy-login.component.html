@@ -1,0 +1,104 @@
+<div class="login-page-container">
+    <div class="left-container">
+      <div class="left-container-tamil-heading">
+        <div></div>
+        <!-- leave it blank -->
+        <h1>மொழிகள்</h1>
+      </div>
+      <div>
+        <img
+          class="tamil-bg-img"
+          src="../../assets/images/tamil_login.svg"
+          alt=""
+        />
+      </div>
+      <div class="left-container-heading">
+        <span>{{ 'COMMON_LOGIN_TO' | i18next }}</span> <br />
+        <span> {{ 'COMMON_MOZHIGAL' | i18next }}</span>
+      </div>
+    </div>
+    <div class="login-container">
+      <!-- <h2>Welcome to Mozhigal</h2> -->
+      <div class="translate-container">
+        <span  (click)="switchToEnglish()">Eng </span>
+        <span (click)="switchToTamil()">/ தமிழ்</span>
+      </div>
+      <div style="text-align: center">
+        <img
+          class="img-fluid"
+          style="cursor: pointer"
+          routerLink="/home"
+          height="64px"
+          width="162.77px"
+          src="../../../../assets/images/mozhighal-login-logo.png"
+          alt="header-logo"
+        />
+      </div>
+      <form class="login-form">
+        <div class="form-group">
+          <label for="username" [style.color]="loginError ? 'red' : ''"
+            >{{ 'USER_USERNAME' | i18next }}</label
+          >
+          <input
+            [style.color]="loginError ? 'red' : ''"
+            type="text"
+            id="username"
+            class="custom-input"
+            [(ngModel)]="email"
+            placeholder="username"
+            name="username"
+            required
+          />
+          <img src="../../assets/images/email.svg" alt="email" />
+          <!-- <span [style.color]="loginError ? 'red' : ''">Incorrect Username?</span> -->
+          <!-- <span>Forgot Username?</span> -->
+        </div>
+  
+        <div class="form-group">
+          <label for="password" [style.color]="loginError ? 'red' : ''"
+            >{{ 'USER_PASSWORD' | i18next }}</label
+          >
+          <input
+            [style.color]="loginError ? 'red' : ''"
+  
+            class="custom-input"
+            [type]="isPasswordVisible ? 'text' : 'password'"
+            id="password"
+            [(ngModel)]="password"
+            (input)="calculatePasswordLength()"
+            placeholder="password"
+            name="password"
+            required
+          />
+          <img
+            [src]="getPasswordIcon()"
+            alt="password"
+            (click)="togglePasswordVisibility()"
+          />
+  
+          <!-- <span>Forgot Password?</span> -->
+        </div>
+       <!-- <div class="captch-code">
+          <span>
+            <img src="../../assets/images/refresh.svg" alt="" />
+            <p>12345</p>
+          </span>
+        </div>
+         <div class="form-group">
+          <label [style.color]="loginError ? 'red' : ''" for="captch"
+            >Captcha</label
+          >
+          <input
+            [style.color]="loginError ? 'red' : ''"
+            type="text"
+            class="custom-input-condition"
+            placeholder="Please enter the characters of the image"
+            name="captch"
+            required
+          />
+        </div> -->
+          <button type="submit" (click)="loginAsBuddy()"> Login As Buddy</button>
+      </form>
+    </div>
+  </div>
+  

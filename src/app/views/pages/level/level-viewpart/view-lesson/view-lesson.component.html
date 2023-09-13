@@ -1,5 +1,10 @@
 <div *ngIf="lessonData">
-  <h4 class="rounded bg-light py-3 px-4">{{lessonData?.title}}</h4>
+  <h4 class="rounded bg-light py-3 px-4">
+    {{lessonData?.title}}
+    <span class="lesson-progress">Points: {{levelService.currentLessonScoreCount}}</span>
+  </h4>
+  <app-lesson-progress [progress]="lessonProgress"></app-lesson-progress>
+
   <div *ngFor="let item of lessonData.data;">
     <section *ngIf="item.type == 'html'" [innerHTML]="item.content">
     </section>
@@ -9,41 +14,50 @@
     </section>
 
     <section *ngIf="item.type == 'audio'">
-      <audio class="w-100 mt-4" controls >
+      <audio (play)="updateLessonProgress()" class="w-100 mt-4" controls>
         <source [src]="item.content" type="audio/mpeg">
         Your browser does not support the audio element.
       </audio>
     </section>
-
     <section *ngIf="item.type == 'video'">
-      <video class="w-50 mx-auto mt-4 rounded" controls>
+      <video (play)="updateLessonProgress()" class="w-50 mx-auto mt-4 rounded" controls>
         <source [src]="item.content" type="video/mp4">
+        <track id="track" [src]="item.subtitles" kind="subtitles" srclang="en" label="English" default />
         Your browser does not support the video element.
+
       </video>
     </section>
 
     <section *ngIf="item.type == 'h5p'" [innerHTML]="getH5pHtml(item.content)| safe: 'html'">
     </section>
+    <section *ngIf="item.type == 'googleInput'">
+      <div style="text-align: center;"><a style="font-size: large;" target="_blank"
+          href="https://www.google.com/intl/ta/inputtools/try/ ">Click here to type in Tamil - தமிழில் தட்டச்சு செய்ய
+          இங்கே கிளிக் செய்யவும்</a>
+      </div>
+    </section>
 
     <section *ngIf="item.type == 'iframe'">
-      <iframe allow="microphone" scrolling="no" width=100%; height="600;" allow="microphone" [src]="item.content | safe: 'resourceUrl'"></iframe>
+      <iframe allow="microphone" scrolling="no" width=100%; height="600;" allow="microphone"
+        [src]="item.content | safe: 'resourceUrl'"></iframe>
     </section>
 
     <section *ngIf="item.type == 'image'">
-      <img width="100%" height="500"  [src]="item.content">
+      <img width="100%" height="500" [src]="item.content">
     </section>
 
 
     <section *ngIf="item.type == 'images'">
-     <ng-container  *ngFor="let image of item.content;">
-      <img width="{{image.width}}" height="{{image.height}}"  src="{{image.src}}"> &nbsp;&nbsp;
-      <!-- <p>{{image.name}}</p> -->
-     </ng-container>
+      <ng-container *ngFor="let image of item.content;">
+        <img width="{{image.width}}" height="{{image.height}}" src="{{image.src}}"> &nbsp;&nbsp;
+        <!-- <p>{{image.name}}</p> -->
+      </ng-container>
     </section>
 
     <section *ngIf="item.type == 'options'">
-      <div class="d-flex justify-content-around">
-        <!-- <ng-container *ngFor="let option of item.content; let i = index">
+      <div (click)="updateLessonProgress()" class="row">
+        <!-- <div class="col-md-4">
+        <ng-container *ngFor="let option of item.content; let i = index">
           <div [ngClass]="!option1Selected ? 'opt-unselected' : 'opt-selected'" (click)="switchModelAnswer(i)">
             <div *ngIf="item.content[i].imageSrc"><img width="200" height="200"  src="{{item.content[i].imageSrc}}"> &nbsp;&nbsp;
             <div class="mt-2"><b>{{item.content[i].name}}</b></div>
@@ -62,149 +76,171 @@
               <button type="button" (click) = "showText()" class="btn btn-primary">Transcript</button>
             </section>
           </div>
-        </ng-container> -->
-
-
-
-        <ng-container>
-          <div [ngClass]="!option1Selected ? 'opt-unselected' : 'opt-selected'" (click)="switchModelAnswer('option1')">
-            <div *ngIf="item?.content[0]?.imageSrc"><img width="200" height="200"  src="{{item.content[0].imageSrc}}"> &nbsp;&nbsp;
-            <div class="mt-2"><b>{{item.content[0].name}}</b></div>
-            </div>
-            <div *ngIf="!item.content[0].imageSrc">
-              <p>{{item.content[0].name}}</p>
-            </div>
-            <div *ngIf="item.content[0].audioSrc">
-              <audio class="w-100 mt-4" controls >
-                <source [src]="item.content[0].audioSrc" type="audio/mp3">
-              Your browser does not support the audio element.
-              </audio>
-            </div>
-            <section *ngIf="item.content[0].quesionTranscript">
-              <div *ngIf="textShow" [innerHTML]="item.content[0].quesionTranscript" class="scrollbar"></div>
-              <button type="button" (click) = "showText()" class="btn btn-primary">Transcript</button>
-            </section>
-          </div>
         </ng-container>
-        <ng-container *ngIf="item?.content[1]?.imageSrc || item?.content[1]?.audioSrc ">
-          <div [ngClass]="!option2Selected ? 'opt-unselected' : 'opt-selected'" (click)="switchModelAnswer('option2')">
-            <div *ngIf="item.content[1].imageSrc"><img width="200" height="200"  src="{{item.content[1].imageSrc}}"> &nbsp;&nbsp;
-            <div class="mt-2"><b>{{item.content[1].name}}</b></div>
-            </div>
-            <div *ngIf="!item.content[1].imageSrc">
-              <p>{{item.content[1].name}}</p>
-            </div>
-            <div *ngIf="item.content[1].audioSrc">
-              <audio class="w-100 mt-4" controls >
-                <source [src]="item.content[1].audioSrc" type="audio/mp3">
-              Your browser does not support the audio element.
-              </audio>
-            </div>
-            <section *ngIf="item.content[1].quesionTranscript">
-              <div *ngIf="textShow" [innerHTML]="item.content[1].quesionTranscript" class="scrollbar"></div>
-              <button type="button" (click) = "showText()" class="btn btn-primary">Transcript</button>
-            </section>
-          </div>
-        </ng-container>
-        <ng-container *ngIf="item?.content[2]?.imageSrc || item?.content[2]?.audioSrc ">
-          <div [ngClass]="!option3Selected ? 'opt-unselected' : 'opt-selected'" (click)="switchModelAnswer('option3')">
-            <div *ngIf="item.content[2].imageSrc"><img width="200" height="200"  src="{{item.content[2].imageSrc}}"> &nbsp;&nbsp;
-            <div class="mt-2"><b>{{item.content[2].name}}</b></div>
-            </div>
-            <div *ngIf="!item.content[2].imageSrc">
-              <p>{{item.content[2].name}}</p>
-            </div>
-            <div *ngIf="item.content[2].audioSrc">
-              <audio class="w-100 mt-4" controls >
-                <source [src]="item.content[2].audioSrc" type="audio/mp3">
-              Your browser does not support the audio element.
-              </audio>
-            </div>
-            <section *ngIf="item.content[2].quesionTranscript">
-              <div *ngIf="textShow" [innerHTML]="item.content[2].quesionTranscript" class="scrollbar"></div>
-              <button type="button" (click) = "showText()" class="btn btn-primary">Transcript</button>
-            </section>
-          </div>
-        </ng-container>
-      </div>
+        </div> -->
 
-      <div *ngIf="option1Selected">
-        <div class="mt-2" [innerHTML]="item.content[0].instructions"></div>
-          <div><b>Model Answer: </b></div>
-        <div class="d-flex justify-content-around">
+
+        <div class="col-md-4">
+
           <ng-container>
-            <div *ngIf="item.content[0].modelImageSrc"><img width="200" height="200"  src="{{item.content[0].modelImageSrc}}"> &nbsp;&nbsp;</div>
-            <div class="mt-5">
-              <div *ngIf="item.content[0].modelAudioSrc">
-                <audio class="w-30 mt-4" controls >
-                  <source [src]="item.content[0].modelAudioSrc" type="audio/mp3">
-                Your browser does not support the audio element.
+            <div [ngClass]="!option1Selected ? 'opt-unselected' : 'opt-selected'"
+              (click)="switchModelAnswer('option1')">
+              <div *ngIf="item?.content[0]?.imageSrc"><img class="img-fluid" src="{{item.content[0].imageSrc}}">
+                &nbsp;&nbsp;
+                <div class="mt-2"><b>{{item.content[0].name}}</b></div>
+              </div>
+              <div *ngIf="!item.content[0].imageSrc">
+                <p>{{item.content[0].name}}</p>
+              </div>
+              <div *ngIf="item.content[0].audioSrc">
+                <audio (play)="updateLessonProgress()" class="w-100 mt-4" controls>
+                  <source [src]="item.content[0].audioSrc" type="audio/mp3">
+                  Your browser does not support the audio element.
                 </audio>
-                <section *ngIf="item.content[0].modelAnsTranscript">
-                  <div *ngIf="textShow" [innerHTML]="item.content[0].modelAnsTranscript" class="scrollbar"></div>
-                  <button type="button" (click) = "showText()" class="btn btn-primary">Transcript</button>
+              </div>
+              <section *ngIf="item.content[0].quesionTranscript">
+                <div *ngIf="textShow" [innerHTML]="item.content[0].quesionTranscript" class="scrollbar"></div>
+                <button type="button" (click)="showText()" class="btn btn-primary">Transcript</button>
+              </section>
+            </div>
+          </ng-container>
+        </div>
+        <div class="col-md-4">
+          <ng-container *ngIf="item?.content[1]?.imageSrc || item?.content[1]?.audioSrc ">
+            <div [ngClass]="!option2Selected ? 'opt-unselected' : 'opt-selected'"
+              (click)="switchModelAnswer('option2')">
+              <div *ngIf="item.content[1].imageSrc"><img class="img-fluid" src="{{item.content[1].imageSrc}}">
+                &nbsp;&nbsp;
+                <div class="mt-2"><b>{{item.content[1].name}}</b></div>
+              </div>
+              <div *ngIf="!item.content[1].imageSrc">
+                <p>{{item.content[1].name}}</p>
+              </div>
+              <div *ngIf="item.content[1].audioSrc">
+                <audio (play)="updateLessonProgress()" class="w-100 mt-4" controls>
+                  <source [src]="item.content[1].audioSrc" type="audio/mp3">
+                  Your browser does not support the audio element.
+                </audio>
+              </div>
+              <section *ngIf="item.content[1].quesionTranscript">
+                <div *ngIf="textShow" [innerHTML]="item.content[1].quesionTranscript" class="scrollbar"></div>
+                <button type="button" (click)="showText()" class="btn btn-primary">Transcript</button>
+              </section>
+            </div>
+          </ng-container>
+        </div>
+        <div class="col-md-4">
+          <ng-container *ngIf="item?.content[2]?.imageSrc || item?.content[2]?.audioSrc ">
+            <div [ngClass]="!option3Selected ? 'opt-unselected' : 'opt-selected'"
+              (click)="switchModelAnswer('option3')">
+              <div *ngIf="item.content[2].imageSrc"><img class="img-fluid" src="{{item.content[2].imageSrc}}">
+                &nbsp;&nbsp;
+                <div class="mt-2"><b>{{item.content[2].name}}</b></div>
+              </div>
+              <div *ngIf="!item.content[2].imageSrc">
+                <p>{{item.content[2].name}}</p>
+              </div>
+              <div *ngIf="item.content[2].audioSrc">
+                <audio (play)="updateLessonProgress()" class="w-100 mt-4" controls>
+                  <source [src]="item.content[2].audioSrc" type="audio/mp3">
+                  Your browser does not support the audio element.
+                </audio>
+              </div>
+              <section *ngIf="item.content[2].quesionTranscript">
+                <div *ngIf="textShow" [innerHTML]="item.content[2].quesionTranscript" class="scrollbar"></div>
+                <button type="button" (click)="showText()" class="btn btn-primary">Transcript</button>
+              </section>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <div class="row">
+        <div *ngIf="option1Selected">
+          <div class="mt-2" [innerHTML]="item.content[0].instructions"></div>
+          <div><b>Model Answer: </b></div>
+          <div class="d-flex justify-content-around">
+            <ng-container>
+              <div *ngIf="item.content[0].modelImageSrc">
+                <img width="200" height="200" src="{{item.content[0].modelImageSrc}}">
+              </div>
+              <div class="mt-5">
+                <div *ngIf="item.content[0].modelAudioSrc">
+                  <audio class="w-30 mt-4" controls>
+                    <source [src]="item.content[0].modelAudioSrc" type="audio/mp3">
+                    Your browser does not support the audio element.
+                  </audio>
+                  <section *ngIf="item.content[0].modelAnsTranscript">
+                    <div *ngIf="textShow" [innerHTML]="item.content[0].modelAnsTranscript" class="scrollbar"></div>
+                    <button type="button" (click)="showText()" class="btn btn-primary">Transcript</button>
+                  </section>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+          <section>
+            <iframe allow="microphone" width=100%; [src]="'lets-talk/Open Story.html' | safe: 'resourceUrl'"></iframe>
+          </section>
+        </div>
+        <div *ngIf="option2Selected">
+          <div class="mt-2" [innerHTML]="item.content[0].instructions"></div>
+          <div><b>Model Answer: </b></div>
+          <div class="d-flex justify-content-around">
+            <ng-container>
+              <div *ngIf="item.content[1].modelImageSrc"><img width="200" height="200"
+                  src="{{item.content[1].modelImageSrc}}"></div>
+              <div class="mt-5">
+                <div *ngIf="item.content[1].modelAudioSrc">
+                  <audio class="w-30 mt-4" controls>
+                    <source [src]="item.content[1].modelAudioSrc" type="audio/mp3">
+                    Your browser does not support the audio element.
+                  </audio>
+                </div>
+                <section *ngIf="item.content[1].modelAnsTranscript">
+                  <div *ngIf="textShow" [innerHTML]="item.content[1].modelAnsTranscript" class="scrollbar"></div>
+                  <button type="button" (click)="showText()" class="btn btn-primary">Transcript</button>
                 </section>
               </div>
-            </div>
-          </ng-container>
+            </ng-container>
+          </div>
+          <section>
+            <iframe allow="microphone" width=100%; [src]="'lets-talk/Open Story.html' | safe: 'resourceUrl'"></iframe>
+          </section>
         </div>
-        <section>
-          <iframe allow="microphone" width=100%; [src]="'lets-talk/Open Story.html' | safe: 'resourceUrl'"></iframe>
-        </section>
-      </div>
-      <div *ngIf="option2Selected">
-        <div class="mt-2" [innerHTML]="item.content[0].instructions"></div>
+        <div *ngIf="option3Selected">
+          <div class="mt-2" [innerHTML]="item.content[0].instructions"></div>
           <div><b>Model Answer: </b></div>
-        <div class="d-flex justify-content-around">
-          <ng-container>
-            <div *ngIf="item.content[1].modelImageSrc"><img width="200" height="200"  src="{{item.content[1].modelImageSrc}}"> &nbsp;&nbsp;</div>
-            <div class="mt-5">
-              <div *ngIf="item.content[1].modelAudioSrc">
-                <audio class="w-30 mt-4" controls >
-                  <source [src]="item.content[1].modelAudioSrc" type="audio/mp3">
-                Your browser does not support the audio element.
-                </audio>
+          <div class="d-flex justify-content-around">
+            <ng-container>
+              <div *ngIf="item.content[2].modelImageSrc"><img width="200" height="200"
+                  src="{{item.content[2].modelImageSrc}}"> &nbsp;&nbsp;</div>
+              <div class="mt-5">
+                <div class="row">
+                  <div class="col-md-7 mx-auto">
+                    <div *ngIf="item.content[2].modelAudioSrc">
+                      <audio class="mt-4" controls>
+                        <source [src]="item.content[2].modelAudioSrc" type="audio/mp3">
+                        Your browser does not support the audio element.
+                      </audio>
+                    </div>
+                    <section *ngIf="item.content[2].modelAnsTranscript">
+                      <div *ngIf="textShow" [innerHTML]="item.content[2].modelAnsTranscript" class="scrollbar"></div>
+                      <button type="button" (click)="showText()" class="btn btn-primary">Transcript</button>
+                    </section>
+                  </div>
+                </div>
               </div>
-              <section *ngIf="item.content[1].modelAnsTranscript">
-                <div *ngIf="textShow" [innerHTML]="item.content[1].modelAnsTranscript" class="scrollbar"></div>
-                <button type="button" (click) = "showText()" class="btn btn-primary">Transcript</button>
-              </section>
-            </div>
-          </ng-container>
+            </ng-container>
+          </div>
+          <section>
+            <iframe allow="microphone" width=100%; [src]="'lets-talk/Open Story.html' | safe: 'resourceUrl'"></iframe>
+          </section>
         </div>
-        <section>
-          <iframe allow="microphone" width=100%; [src]="'lets-talk/Open Story.html' | safe: 'resourceUrl'"></iframe>
-        </section>
       </div>
-      <div *ngIf="option3Selected">
-        <div class="mt-2" [innerHTML]="item.content[0].instructions"></div>
-          <div><b>Model Answer: </b></div>
-        <div class="d-flex justify-content-around">
-          <ng-container>
-            <div *ngIf="item.content[2].modelImageSrc"><img width="200" height="200"  src="{{item.content[2].modelImageSrc}}"> &nbsp;&nbsp;</div>
-            <div class="mt-5">
-              <div *ngIf="item.content[2].modelAudioSrc">
-                <audio class="w-30 mt-4" controls >
-                  <source [src]="item.content[2].modelAudioSrc" type="audio/mp3">
-                Your browser does not support the audio element.
-                </audio>
-              </div>
-              <section *ngIf="item.content[2].modelAnsTranscript">
-                <div *ngIf="textShow" [innerHTML]="item.content[2].modelAnsTranscript" class="scrollbar"></div>
-                <button type="button" (click) = "showText()" class="btn btn-primary">Transcript</button>
-              </section>
-            </div>
-          </ng-container>
-        </div>
-        <section>
-          <iframe allow="microphone" width=100%; [src]="'lets-talk/Open Story.html' | safe: 'resourceUrl'"></iframe>
-        </section>
-      </div>
+    </section>
 
-     </section>
-
-      <section *ngIf="item.type == 'openStory'" [innerHTML]="getOpenStoryHtml(item.content) | safe: 'html'">
-      <iframe allow="microphone" width=100%; height="600;" [src]="'lets-talk/Open Story.html' | safe: 'resourceUrl'"></iframe>
+    <section *ngIf="item.type == 'openStory'" [innerHTML]="getOpenStoryHtml(item.content) | safe: 'html'">
+      <iframe allow="microphone" width=100%; height="600;"
+        [src]="'lets-talk/Open Story.html' | safe: 'resourceUrl'"></iframe>
     </section>
 
     <section *ngIf="item.type == 'wordHelp'">
@@ -213,7 +249,7 @@
 
     <section *ngIf="item.type == 'transcript'">
       <div *ngIf="textShow" [innerHTML]="item.content" class="scrollbar"></div>
-      <button type="button" (click) = "showText()" class="btn btn-primary">Transcript</button>
+      <button type="button" (click)="showText()" class="btn btn-primary">Transcript</button>
     </section>
 
 

@@ -9,9 +9,11 @@
       {
         "type": "h5p",
         "content": "https://h5p.org/h5p/embed/1355979"
-        }
-        
+      },
+      {
+        "type": "googleInput"
+      }
+
   ]
   }
-  
-  
+

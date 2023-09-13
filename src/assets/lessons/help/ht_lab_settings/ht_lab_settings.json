@@ -1,0 +1,9 @@
+{
+  "title": "HT Lab settings",
+  "id": "ht_lab_settings",
+  "data": [
+    {
+        "type": "video",
+        "content": "/assets/lessons/help/ht_lab_settings/ht_lab_settings.mp4"
+    }
+]}

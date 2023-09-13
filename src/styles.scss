@@ -125,6 +125,10 @@
 
 
 }
+
+.p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link:not(.p-disabled):hover .p-menuitem-icon{
+  color: #FFD700;
+}
 // .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link:active{
 //   background-color: red !important;
 // }
@@ -621,6 +625,9 @@ th[sortable].desc:after {
 .p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link .p-menuitem-text:first-child{
   font-size: 14px;
 }
+.p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link .p-menuitem-icon{
+  color: #FFD700;
+}
 .p-panelmenu .p-panelmenu-panel {
   margin-bottom: 8px;
 }
@@ -634,10 +641,9 @@ th[sortable].desc:after {
 .footer-level-img{
   margin-top: 50px;
   background-image: url(./assets/home-asset/level-footer.png);
-  height: 474px;
+  height: 470px;
   background-repeat: no-repeat;
-  background-size: cover;
-  background-position: left;
+  background-size: cover; 
 }
 
 .sidepanel .pi-chevron-right:before, .sidepanel .pi-angle-right:before {
@@ -665,12 +671,6 @@ th[sortable].desc:after {
   margin-top: -14px;
   position: absolute;
   right: 26px;
-}
-li a[aria-expanded="true"] span{
-  color: #662D91 !important;
-  font-weight: 700 !important;
-  font-size: 14px !important;
-  line-height: 17px !important;
 }
 
 .owl-carousel .owl-nav .owl-prev{
@@ -700,13 +700,50 @@ li a[aria-expanded="true"] span{
   font-size: 14px;
 }
 @media (max-width: 991px){
-.page-wrapper {
-    margin-top: 0px !important;
-}
+  .page-wrapper {
+      margin-top: 0px !important;
+  }
+  .footer-level-img {
+    background:#662D91;
+    padding-top:2rem;
+    height:350px;
+  }
+  .content{
+    margin-top:0rem !important;;
+  }
 }
 .p-panelmenu .p-panelmenu-header.p-highlight a {
   position: relative !important;
 }
 .sidepanel .p-panelmenu-content .p-menuitem .p-menuitem-link{
   position: relative !important;
+}
+.sidepanel .p-panelmenu-content .p-menuitem .p-menuitem .p-menuitem-link {
+  background: #fff !important;
+}
+
+
+.p-panelmenu .p-panelmenu-content .p-submenu-list:not(.p-panelmenu-root-submenu){
+  border: 1px solid #dee2e6;
+}
+.p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link .p-panelmenu-icon{
+margin-left: -28px !important;
+}
+
+.sidepanel .p-panelmenu-content .p-menuitem .p-menuitem-link.p-menuitem-link-active {
+  background: #cbb1df  !important;
+  color: #662D91 !important;
+  font-weight: 700 !important;
+  line-height: 17px !important;
+}
+blockquote {
+  margin: 0.5rem 0 1rem !important;
+  font-size: 16px;
+}
+section ul li{
+  font-size: 16px;
+  margin: 2px 0px 0px 0px;
+}
+section ul{
+  margin-top:10px;
 }

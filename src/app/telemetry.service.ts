@@ -1,19 +1,42 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { CsTelemetryModule } from '@project-sunbird/client-services/telemetry';
 import { UtilService } from './util.service';
+import { UserService } from './user/user.service';
+import { environment } from 'src/environments/environment';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TelemetryService {
-
   private contentSessionId: string;
   private playSessionId: string;
   private telemetryObject: any;
   private context;
   public config;
+  public TELEMETRY_MODE = environment.telemetry_mode;
 
-  constructor(private utilService: UtilService) {
+  startDuration: number;
+
+  constructor(
+    public userService: UserService,
+    private utilService: UtilService
+  ) {
     this.contentSessionId = this.utilService.uniqueId();
+    localStorage.setItem('contentSessionId', this.contentSessionId);
+  }
+
+
+  telemetryMode(currentMode) {
+    if (
+      (this.TELEMETRY_MODE === 'ET' && currentMode === 'ET') ||
+      (this.TELEMETRY_MODE === 'NT' &&
+        (currentMode === 'ET' || currentMode === 'NT')) ||
+      (this.TELEMETRY_MODE === 'DT' &&
+        (currentMode === 'ET' || currentMode === 'NT' || currentMode === 'DT'))
+    ) {
+      return true;
+    }
+    return false;
+
   }
 
   public initialize({ context, config, metadata }) {
@@ -23,50 +46,68 @@ export class TelemetryService {
 
     if (!CsTelemetryModule.instance.isInitialised) {
       CsTelemetryModule.instance.init({});
-      const telemetryConfig: any =  {
+      const telemetryConfig: any = {
         config: {
           pdata: context.pdata,
-          env: 'contentplayer',
+          env: 'languagelab.portal',
           channel: context.channel,
           did: context.did,
           authtoken: context.authToken || '',
-          uid: context.uid || '',
+          uid: context.uid || 'anonymous',
           sid: context.sid,
-          batchsize: 1,
+          batchsize: 10,
           mode: context.mode,
-          host: context.host || '',
-          apislug: '/telemetry/',
-          endpoint: context.endpoint || '/data/v3/telemetry',
+          host: context.host,
+          apislug: context.apislug,
+          endpoint: context.endpoint,
           tags: context.tags,
-          cdata: [{ id: this.contentSessionId, type: 'ContentSession' },
-          { id: this.playSessionId, type: 'PlaySession' },
-          {id: '2.0' , type: 'PlayerVersion'}]
+          cdata: [
+            { id: this.contentSessionId, type: 'ContentSession' },
+            { id: this.playSessionId, type: 'PlaySession' },
+          ],
         },
-        userOrgDetails: {}
+        userOrgDetails: {},
       };
       if (context.dispatcher) {
         telemetryConfig.config.dispatcher = context.dispatcher;
       }
-      CsTelemetryModule.instance.telemetryService.initTelemetry(telemetryConfig);
+      CsTelemetryModule.instance.telemetryService.initTelemetry(
+        telemetryConfig
+      );
     }
 
     this.telemetryObject = {
       id: metadata.identifier,
       type: 'Content',
       ver: metadata.pkgVersion + '' || '1.0',
-      rollup: context.objectRollup || {}
+      rollup: context.objectRollup || {},
     };
   }
 
+  public start(pageid) {
+    this.startDuration = new Date().getTime();
+    CsTelemetryModule.instance.telemetryService.raiseStartTelemetry({
+      options: this.getEventOptions(),
+      edata: { type: 'content', mode: 'play', pageid: pageid },
+    });
+  }
 
-  public start(duration) {
-    CsTelemetryModule.instance.telemetryService.raiseStartTelemetry(
-      {
+
+
+  public log(type, message, pageid, data, currentMode) {
+    if (this.telemetryMode(currentMode)) {
+      this.startDuration = new Date().getTime();
+      CsTelemetryModule.instance.telemetryService.raiseLogTelemetry({
         options: this.getEventOptions(),
-        edata: { type: 'content', mode: 'play', pageid: '', duration: Number((duration / 1e3).toFixed(2)) }
-      }
-    );
-
+        edata: {
+          type: type || 'system', // Required. Type of log (system, process, api_access, api_call, job, app_update etc)
+          level: 'INFO', // Required. Level of the log. TRACE, DEBUG, INFO, WARN, ERROR, FATAL
+          message: message || 'log', // Required. Log message
+          pageid: pageid || '', // Optional. Page where the log event has happened
+          params: [data], // Optional. Additional params in the log message
+        },
+      });
+    }
   }
 
   public end() {
@@ -74,70 +115,114 @@ export class TelemetryService {
       edata: {
         type: 'content',
         mode: 'play',
-        pageid: 'sunbird-player-Endpage',
+        pageid: 'language-lab',
         summary: [],
-        duration: '000'
+        duration: new Date().getTime() - this.startDuration,
       },
-      options: this.getEventOptions()
-    });
-
-  }
-
-  public interact(id) {
-    CsTelemetryModule.instance.telemetryService.raiseInteractTelemetry({
       options: this.getEventOptions(),
-      edata: { type: 'TOUCH', subtype: '', id, pageid: id }
     });
   }
 
-  public search(id) {
-    CsTelemetryModule.instance.telemetryService.raiseSearchTelemetry({
-      options: this.getEventOptions(),
-      edata: { // Required
-        type: 'content', // Required. content, assessment, asset
-        query: id, // Required. Search query string
-        filters: {}, // Optional. Additional filters
-        sort: {}, // Optional. Additional sort parameters
-        correlationid: '', // Optional. Server generated correlation id (for mobile app's telemetry)
-        size: 0, // Required. Number of search results
-        topn: [{}] // Required. top N (configurable) results with their score
+  public response(data, currentMode) {
+    if (this.telemetryMode(currentMode)) {
+      CsTelemetryModule.instance.telemetryService.raiseResponseTelemetry(
+        data,
+        this.getEventOptions()
+      );
     }
-    });
   }
 
-  public impression(currentPage) {
-    CsTelemetryModule.instance.telemetryService.raiseImpressionTelemetry({
-      options: this.getEventOptions(),
-      edata: { type: 'workflow', subtype: '', pageid: currentPage + '', uri: '' }
-    });
+  public interact(id, currentPage, currentMode) {
+    if (this.telemetryMode(currentMode)) {
+      CsTelemetryModule.instance.telemetryService.raiseInteractTelemetry({
+        options: this.getEventOptions(),
+        edata: { type: 'TOUCH', subtype: '', id, pageid: currentPage + '' },
+      });
+    }
   }
 
-  public error(error: any, data: { err: string, errtype: string }) {
-    CsTelemetryModule.instance.telemetryService.raiseErrorTelemetry({
+  public search(id, currentMode) {
+    if (this.telemetryMode(currentMode)) {
+      CsTelemetryModule.instance.telemetryService.raiseSearchTelemetry({
+        options: this.getEventOptions(),
+        edata: {
+          // Required
+          type: 'content', // Required. content, assessment, asset
+          query: id, // Required. Search query string
+          filters: {}, // Optional. Additional filters
+          sort: {}, // Optional. Additional sort parameters
+          correlationid: '', // Optional. Server generated correlation id (for mobile app's telemetry)
+          size: 0, // Required. Number of search results
+          topn: [{}], // Required. top N (configurable) results with their score
+        },
+      });
+    }
+  }
+
+  public impression(currentPage, uri, currentMode) {
+    if (this.telemetryMode(currentMode)) {
+      CsTelemetryModule.instance.telemetryService.raiseImpressionTelemetry({
+        options: this.getEventOptions(),
+        edata: {
+          type: 'workflow',
+          subtype: '',
+          pageid: currentPage + '',
+          uri: uri,
+        },
+      });
+    }
+  }
+
+  public error(
+    error: any,
+    data: { err: string; errtype: string },
+    currentMode
+  ) {
+    if (this.telemetryMode(currentMode)) {
+      CsTelemetryModule.instance.telemetryService.raiseErrorTelemetry({
+        options: this.getEventOptions(),
+        edata: {
+          err: data.err,
+          errtype: data.errtype,
+          stacktrace: error.toString() || '',
+        },
+      });
+    }
+  }
+
+
+  public feedback(data) {
+    CsTelemetryModule.instance.telemetryService.raiseFeedBackTelemetry({
       options: this.getEventOptions(),
       edata: {
-        err: data.err,
-        errtype: data.errtype,
-        stacktrace: error.toString() || ''
+        "contentId": "", // Required. Id of the content
+        "rating": data, // Optional. Numeric score (+1 for like, -1 for dislike, or 4.5 stars given in a rating)
+        "comments": "User feedback" // Optional. Text feedback (if any)
       }
     });
   }
 
   private getEventOptions() {
-    return ({
-      object: this.telemetryObject,
+   const isBuddyLogin = this.userService.isBuddyLoggedIn();
+    const userType = isBuddyLogin ? 'Buddy User' : 'User';
+    const userId = isBuddyLogin ? this.userService.getUser().emis_username + "/" +this.userService.getBuddyUser().emis_username : this.userService.getUser().emis_username;
+
+    return {
+      object: {},
       context: {
         channel: this.context.channel,
         pdata: this.context.pdata,
-        env: 'contentplayer',
+        env: 'languagelab.portal',
         sid: this.context.sid,
-        uid: this.context.uid,
-        cdata: [{ id: this.contentSessionId, type: 'ContentSession' },
-        { id: this.playSessionId, type: 'PlaySession' },
-        {id: '2.0' , type: 'PlayerVersion'}],
-        rollup: this.context.contextRollup || {}
-      }
-    });
-  }
+        uid: isBuddyLogin ? this.userService.getUser().emis_username + "/" +this.userService.getBuddyUser().emis_username : this.userService.getUser().emis_username || 'anonymous',
+        cdata: [
+          { id: this.contentSessionId, type: 'ContentSession' },
+          { id: this.playSessionId, type: 'PlaySession' },
+          { id: userId, type: userType }
+        ],
+        rollup: this.context.contextRollup || {},
+      },
 
+    };
+  }
 }

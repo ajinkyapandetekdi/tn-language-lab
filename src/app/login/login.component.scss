@@ -1,0 +1,211 @@
+.login-page-container{
+  height: 100vh;
+  display: flex;
+  background-color: white;
+}
+.left-container{
+  background-color: #662D91;
+  height: 100vh;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.left-container-tamil-heading{
+  transform: rotate(-0.25turn);
+  display: flex;
+  // border: 1px solid white;
+  position: absolute;
+  left: -3%;
+  bottom: 25%;
+}
+.left-container-tamil-heading :first-child{
+  border-left: 1px solid white;
+  height: 150px;
+  transform: rotate(-0.25turn);
+  position: absolute;
+  top: -135%;
+  left: -70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tamil-bg-img{
+  position: absolute;
+  left: 5%;
+  bottom: 7%;
+}
+.left-container-tamil-heading > h1{
+  font-weight: 1000;
+  font-size: 32px;
+  
+}
+.left-container-heading :nth-child(1){
+  font-size: 22px;
+  font-weight: 900;
+
+}
+.left-container-heading :nth-child(3){
+  font-size: 44px;
+  font-weight: 1000;
+}
+
+// right part of the login page
+
+.login-container {
+  max-width: 450px;
+  // max-width: 50%;
+  margin: 0 auto;
+  padding: 20px;
+  // background-color: #f9f9f9;
+  width: 100%;
+}
+
+.translate-container{
+position: absolute;
+right: 5%;
+cursor: pointer;
+}
+
+.translate-container span:first-child{
+  color: #ED217C;
+}
+
+.img-fluid{
+  margin-top: 20%;
+}
+.login-form{
+    margin-top: 30%;
+}
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  position: relative;
+
+}
+
+.form-group > img{
+  position: absolute;
+  margin-left: -30px;
+  margin-top: 12px;
+}
+
+.form-group>span{
+  position: absolute; 
+  right: 0px; 
+  border: 2px;
+  font-size: 14px;
+  bottom: -22px;
+  margin-top: 20px;
+}
+.captch-code{
+  text-indent: 20px;
+}
+.captch-code > span > p{
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.captch-code > span{
+  text-align: center;
+  display: flex;
+  padding: 10px;
+  background-color: #F7F5F8;
+  width: 40%;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+}
+
+
+.custom-input {
+  background-color: #F7F5F8 !important;
+  width: 100%;
+  padding: 10px;
+  // border: 1px solid #ccc;
+  border: none;
+  border-radius: 10px;
+  
+}
+
+.custom-input-condition{
+  border: 1px solid #ccc;
+  background-color:#F7F5F8;
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  
+}
+.custom-input:hover{
+   outline:1px solid #662D91;
+}
+.custom-input::placeholder {
+  font-size: 14px; /* Adjust the font size as needed */
+  color: #BAB3C0; /* Adjust the color as needed */
+}
+
+.captch-code{
+  display: flex;
+  justify-content: center;
+  margin-top: 25%;
+  margin-bottom: 25%;
+}
+.custom-input-condition{
+  font-size: 14px;
+}
+
+button[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: #BAB3C0;
+  color: #fff;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #662D91;
+}
+
+.login-via-mobile{
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 10px;
+  color: #662D91;
+  cursor: pointer;
+  border: 1px solid #662D91;
+  background-color: white;
+}
+
+
+/* Add responsive styles here */
+@media screen and (max-width: 1000px) {
+  .tamil-bg-img{
+    display: none;
+  }
+}
+
+@media screen and (max-width: 840px) {
+  .left-container{
+    display: none;
+  }
+
+.tamil-bg-img{
+  display: none;
+}
+}

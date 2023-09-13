@@ -1,5 +1,5 @@
 // index.js ---------------
-//Model 
+//Model
 //none
 //View
 var microphoneButton = document.getElementsByClassName("start-recording-button")[0];
@@ -96,7 +96,7 @@ var elapsedTimeTimer;
 
 /** Starts the audio recording*/
 function startAudioRecording() {
-
+  window.parent.postMessage('start-recording', '*')
     console.log("Recording Audio...");
 
     //If a previous audio recording is playing, pause it
@@ -158,7 +158,7 @@ function startAudioRecording() {
 /** Stop the currently started audio recording & sends it
  */
 function stopAudioRecording() {
-
+  window.parent.postMessage('stop-recording', '*')
     console.log("Stopping Audio Recording...");
 
     //stop the recording using the audio recording API
@@ -194,7 +194,7 @@ function cancelAudioRecording() {
 }
 
 /** Plays recorded audio using the audio element in the HTML document
- * @param {Blob} recorderAudioAsBlob - recorded audio as a Blob Object 
+ * @param {Blob} recorderAudioAsBlob - recorded audio as a Blob Object
 */
 function playAudio(recorderAudioAsBlob) {
     //read content of files (Blobs) asynchronously
@@ -248,7 +248,7 @@ function handleElapsedRecordingTime() {
 }
 
 /** Display elapsed time during audio recording
- * @param {String} elapsedTime - elapsed time in the format mm:ss or hh:mm:ss 
+ * @param {String} elapsedTime - elapsed time in the format mm:ss or hh:mm:ss
  */
 function displayElapsedTimeDuringAudioRecording(elapsedTime) {
     //1. display the passed elapsed time as the elapsed time in the elapsedTime HTML element
@@ -261,7 +261,7 @@ function displayElapsedTimeDuringAudioRecording(elapsedTime) {
 }
 
 /**
- * @param {String} elapsedTime - elapsed time in the format mm:ss or hh:mm:ss  
+ * @param {String} elapsedTime - elapsed time in the format mm:ss or hh:mm:ss
  * @returns {Boolean} whether the elapsed time reached the maximum number of hours or not
  */
 function elapsedTimeReachedMaximumNumberOfHours(elapsedTime) {
@@ -328,7 +328,7 @@ function computeElapsedTime(startTime) {
 }
 
 // audio-recording.js ---------------
-//API to handle audio recording 
+//API to handle audio recording
 
 var audioRecorder = {
     /** Stores the recorded audio as Blob objects of audio data as the recording continues*/
@@ -337,7 +337,7 @@ var audioRecorder = {
     mediaRecorder: null, /*of type MediaRecorder*/
     /** Stores the reference to the stream currently capturing the audio*/
     streamBeingCaptured: null, /*of type MediaStream*/
-    /** Start recording the audio 
+    /** Start recording the audio
      * @returns {Promise} - returns a promise that resolves if audio recording successfully started
      */
     start: function () {
@@ -392,7 +392,7 @@ var audioRecorder = {
             audioRecorder.mediaRecorder.addEventListener("stop", () => {
                 //create a single blob object, as we might have gathered a few Blob objects that needs to be joined as one
                 let audioBlob = new Blob(audioRecorder.audioBlobs, { type: mimeType });
-                
+
                 //resolve promise with the single audio blob representing the recorded audio
                 resolve(audioBlob);
             });

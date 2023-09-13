@@ -45,11 +45,6 @@
                 "input": "src/assets/lets-talk",
                 "output": "lets-talk"
               },
-              {
-                "glob": "**/*",
-                "input": "src/assets/home-page",
-                "output": "home-page"
-              },
               "src/favicon.ico",
               "src/assets",
               "src/.htaccess"

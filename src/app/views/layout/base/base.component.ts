@@ -3,6 +3,7 @@ import { Router, RouteConfigLoadStart, RouteConfigLoadEnd } from '@angular/route
 // import { AuthenticationService } from 'src/app/core/services/authentication.service';
 // import { UserSessionService } from 'src/app/core/services/usersession.service';
 import { DEFAULT_INTERRUPTSOURCES, Idle } from '@ng-idle/core';
+import { TelemetryService } from 'src/app/telemetry.service';
 
 @Component({
   selector: 'app-base',
@@ -19,14 +20,14 @@ export class BaseComponent implements OnInit {
   iat: any;
   timeleft: any;
 
-  constructor(private router: Router,
+  constructor(public telemetryService: TelemetryService, private router: Router,
     private idle: Idle,
     // private userSessionService:UserSessionService,
     // private authService:AuthenticationService
-    ) { 
+    ) {
 
     // Spinner for lazyload modules
-    router.events.forEach((event) => { 
+    router.events.forEach((event) => {
       if (event instanceof RouteConfigLoadStart) {
         this.isLoading = true;
       } else if (event instanceof RouteConfigLoadEnd) {
@@ -65,14 +66,14 @@ export class BaseComponent implements OnInit {
     // keepalive.interval(15);
 
     // keepalive.onPing.subscribe(() => (this.lastPing = new Date()));
-    if (window.location.pathname.includes('/auth/login')) {
+    if (window.location.pathname.includes('/login')) {
       idle.stop();
     } else {
       idle.watch();
       this.timedOut = false;
     }
 
-    
+
   }
 
   ngOnInit(): void {
@@ -89,12 +90,15 @@ export class BaseComponent implements OnInit {
     // var path = this.userSessionService.localStorageSessionKey;
     // localStorage.removeItem(path);
     // this.authService.logOut();
+    this.telemetryService.end();
     localStorage.clear();
-    this.router.navigate(['/auth/login']);
+    setTimeout(() => {
+      this.router.navigate(['/login']);
+    }, 1000);
   }
 
   displayModalbutton(){
-  
+
   }
 
   expireLogout() {

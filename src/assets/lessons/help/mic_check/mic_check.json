@@ -1,0 +1,9 @@
+{
+  "title": "Health Check",
+  "id": "mic_check",
+  "data": [
+    {
+        "type": "iframe",
+        "content": "/assets/lessons/help/mic_check/index.html"
+    }
+]}

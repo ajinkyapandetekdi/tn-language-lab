@@ -11,6 +11,11 @@ export class LogsService {
     this.contentSessionId = this.utilService.uniqueId();
   }
 
+  public getFingerPrintJsId = () => {
+    const fpDetails_v2 = localStorage.getItem("fpDetails_v2");
+    return fpDetails_v2 ? JSON.parse(fpDetails_v2) : {};
+  };
+  
   public getDb = () => {
     const SchemaData = localStorage.getItem(this.schemaName);
     return SchemaData ? JSON.parse(SchemaData) : {};

@@ -1,15 +1,9 @@
 const PROXY_CONFIG = [
     {
         context: [
-            "/content-plugins",
-            "/generic-editor",
-            "/content-editor",
-            "/action",
-            "/content",
-            "/api",
-            "/assets"
+            "/v1/telemetry"
         ],
-        "target": "https://dev.knowlg.sunbird.org/",
+        "target": 'https://telemetry-dev.theall.ai',
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": true
