@@ -6,9 +6,9 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-6">
-          <img class="img-fluid" style="cursor: pointer;" width="59px" routerLink="/home" height="59px"
+          <img class="img-fluid logo cursor-pointer" routerLink="/home"
             src="../../../../assets/home-asset/header-round.png" alt="">
-          <img class="img-fluid ms-3" style="cursor: pointer;" height="64px" routerLink="/home" width="162.77px"
+          <img class="img-fluid ms-3 cursor-pointer white-logo" routerLink="/home"
             src="../../../../assets/home-asset/mozhigal_white.png" alt="header-logo">
         </div>
         <div class="col-md-6 d-flex justify-content-end">
@@ -18,28 +18,27 @@
               <label class="form-label text-white">
                 <span *ngIf="isGuestUser">
                   <dl>
-                    <dt>{{ userService.getUser()?.student_name || 'Guest User' }} / {{
+                    <dt class="font-weight-bold">{{ userService.getUser()?.student_name || 'Guest User' }} / {{
                       userService.getUser()?.emis_username || 'Anonymous' }}</dt>
-                    <li style="font-size: small;">
+                    <li>
                       <img src="../../../../assets/images/Star.svg" alt="" /> Stars: {{ levelService.stars }}
-                      <img style="height: 20px;" src="../../../../assets/images/Points.png" alt="" /> Total Points: {{
+                      <img class="h-20" src="../../../../assets/images/Points.png" alt="" /> Total Points: {{
                       levelService.totalPoints.toFixed(2) }}
                     </li>
                   </dl>
                 </span>
                 <div *ngIf="!isGuestUser">
                   <dl>
-                    <dt> <span style="font-weight: 700;"> {{ userService.getUser()?.student_name }} </span> | {{
+                    <dt class="font-weight-bold"> <span> {{ userService.getUser()?.student_name }} </span> | {{
                       userService.getUser()?.emis_username }}</dt>
-                    <li style="font-size: small;">
+                    <li>
                       <img src="../../../../assets/images/Star.svg" alt="" /> Stars: {{
                       levelService.stars }}
-                      <img style="height: 20px;" src="../../../../assets/images/Points.png" alt="" /> Total Points: {{
+                      <img class="h-20" src="../../../../assets/images/Points.png" alt="" /> Total Points: {{
                       levelService.totalPoints.toFixed(2) }}
                     </li>
                   </dl>
                 </div>
-
               </label>
             </div>
 
@@ -69,18 +68,18 @@
                 </li>
                 <div *ngIf="isBuddyLogin; else notBuddyLogin">
                   <dl>
-                    <dt> <span style="font-weight: 700;"> {{ userService.getBuddyUser()?.student_name }} </span> / {{
+                    <dt class="font-weight-bold"> <span> {{ userService.getBuddyUser()?.student_name }} </span> / {{
                       userService.getBuddyUser()?.emis_username }}</dt>
-                    <li style="font-size: small;" class="list"> <img style="" src="../../../../assets/images/Star.svg"
-                        alt="" /> Stars: {{ levelService.buddyStars }} | <img style="height: 20px;"
-                        src="../../../../assets/images/Points.png" alt="" /> Total Points: {{
+                    <li class="list"> <img src="../../../../assets/images/Star.svg" alt="" /> Stars: {{
+                      levelService.buddyStars }} | <img class="h-20" src="../../../../assets/images/Points.png"
+                        alt="" /> Total Points: {{
                       levelService.buddyTotalPoints.toFixed(2) }}</li>
                   </dl>
                 </div>
                 <ng-template #notBuddyLogin>
                 </ng-template>
                 <li class="text-danger h5 list-unstyled"
-                  (click)="telemetryService.interact('logout', 'level','NT'); logout()"><img style="height: 30px;"
+                  (click)="telemetryService.interact('logout', 'level','NT'); logout()"><img class="h-30"
                     src="../../../../assets/images/log.svg" alt=""> Logout</li>
               </ul>
             </div>
@@ -116,36 +115,36 @@
     <div class="container">
       <div class="row pt-5">
         <div class="position-relative">
-        <div class="content">
-          <h6>
-            A lot of work has gone into making the Mozhigal lesson content.
-            <br> We have also used resources from many different places.
-          </h6>
-          <h6 class="mt-4">
-            To view the sources who have inspired the content and who have <br>created the lessons and the activities
-            for
-            Level 1,
-            please <a
-              href="https://clixplatform.tiss.edu/eb-unit0-english-beginner/course/activity_player/5a7d3ff769602a01579b0aa5/5a8b97b569602a01579eba4d/"
-              target="_blank">Click here.</a>
-          </h6>
-          <h6 class="mt-4">
-            To view the sources who have inspired the content and who have <br>created the lessons and the activities
-            for
-            Level 2, please <a
-              href="https://clixplatform.tiss.edu/eb-unit1-english-beginner/course/activity_player/5a8b9b9c69602a0154bd46d4/5a8b9b2369602a01579ebaf2/"
-              target="_blank">Click here.</a>
-          </h6>
-          <div class="mt-4">
-            <span style="color: white;">Visitors Counter: </span>
-            <!-- hitwebcounter Code START -->
-            <a href="https://www.hitwebcounter.com" target="_blank">
-              <img
-                src="https://hitwebcounter.com/counter/counter.php?page=8417830&style=0006&nbdigits=1&type=ip&initCount=0"
-                title="Free Counter" Alt="web counter" border="0" /></a>
-            <div>Device Id: {{this.logService.getFingerPrintJsId()?.result}}</div>
+          <div class="content">
+            <h6>
+              A lot of work has gone into making the Mozhigal lesson content.
+              <br> We have also used resources from many different places.
+            </h6>
+            <h6 class="mt-4">
+              To view the sources who have inspired the content and who have <br>created the lessons and the activities
+              for
+              Level 1,
+              please <a
+                href="https://clixplatform.tiss.edu/eb-unit0-english-beginner/course/activity_player/5a7d3ff769602a01579b0aa5/5a8b97b569602a01579eba4d/"
+                target="_blank">Click here.</a>
+            </h6>
+            <h6 class="mt-4">
+              To view the sources who have inspired the content and who have <br>created the lessons and the activities
+              for
+              Level 2, please <a
+                href="https://clixplatform.tiss.edu/eb-unit1-english-beginner/course/activity_player/5a8b9b9c69602a0154bd46d4/5a8b9b2369602a01579ebaf2/"
+                target="_blank">Click here.</a>
+            </h6>
+            <div class="mt-4">
+              <span class="text-white">Visitors Counter: </span>
+              <!-- hitwebcounter Code START -->
+              <a href="https://www.hitwebcounter.com" target="_blank">
+                <img
+                  src="https://hitwebcounter.com/counter/counter.php?page=8417830&style=0006&nbdigits=1&type=ip&initCount=0"
+                  title="Free Counter" Alt="web counter" border="0" /></a>
+              <div>Device Id: {{this.logService.getFingerPrintJsId()?.result}}</div>
+            </div>
           </div>
-        </div>
         </div>
 
       </div>
