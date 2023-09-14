@@ -148,6 +148,16 @@ ul.dropdown-list.shadow.p-3.mb-2.bg-body.rounded {
   font-weight: bold;
 }
 
+
+.points{
+  margin-top: -5px; 
+  margin-left: 5px
+}
+
+.Star{
+  margin-top: -5px;
+}
+
 @media screen and (max-width: 600px) {
   .user-active {
     margin-top: 2%;
@@ -174,3 +184,4 @@ ul.dropdown-list.shadow.p-3.mb-2.bg-body.rounded {
     right: 6%;
   }
 }
+

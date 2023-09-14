@@ -21,8 +21,8 @@
                     <dt class="font-weight-bold">{{ userService.getUser()?.student_name || 'Guest User' }} / {{
                       userService.getUser()?.emis_username || 'Anonymous' }}</dt>
                     <li>
-                      <img src="../../../../assets/images/Star.svg" alt="" /> Stars: {{ levelService.stars }}
-                      <img class="h-20" src="../../../../assets/images/Points.png" alt="" /> Total Points: {{
+                      <img class="Star" src="../../../../assets/images/Star.svg" alt="" /> Stars: {{ levelService.stars }}
+                      <img class="h-20 points" src="../../../../assets/images/Points.png" alt="" /> Total Points: {{
                       levelService.totalPoints.toFixed(2) }}
                     </li>
                   </dl>
@@ -32,9 +32,9 @@
                     <dt class="font-weight-bold"> <span> {{ userService.getUser()?.student_name }} </span> | {{
                       userService.getUser()?.emis_username }}</dt>
                     <li>
-                      <img src="../../../../assets/images/Star.svg" alt="" /> Stars: {{
+                      <img class="Star"  src="../../../../assets/images/Star.svg" alt="" /> Stars: {{
                       levelService.stars }}
-                      <img class="h-20" src="../../../../assets/images/Points.png" alt="" /> Total Points: {{
+                      <img class="h-20 points"  src="../../../../assets/images/Points.png" alt="" /> Total Points: {{
                       levelService.totalPoints.toFixed(2) }}
                     </li>
                   </dl>
@@ -70,8 +70,8 @@
                   <dl>
                     <dt class="font-weight-bold"> <span> {{ userService.getBuddyUser()?.student_name }} </span> / {{
                       userService.getBuddyUser()?.emis_username }}</dt>
-                    <li class="list"> <img src="../../../../assets/images/Star.svg" alt="" /> Stars: {{
-                      levelService.buddyStars }} | <img class="h-20" src="../../../../assets/images/Points.png"
+                    <li class="list"> <img class="Star"  src="../../../../assets/images/Star.svg" alt="" /> Stars: {{
+                      levelService.buddyStars }} | <img class="h-20 points" src="../../../../assets/images/Points.png"
                         alt="" /> Total Points: {{
                       levelService.buddyTotalPoints.toFixed(2) }}</li>
                   </dl>

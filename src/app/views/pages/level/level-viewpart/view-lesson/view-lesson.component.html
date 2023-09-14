@@ -1,7 +1,7 @@
 <div *ngIf="lessonData">
   <h4 class="rounded bg-light py-3 px-4">
     {{lessonData?.title}}
-    <span class="lesson-progress">Points: {{levelService.currentLessonScoreCount}}</span>
+    <span class="lesson-progress"><img class="money-bag" src="../../../../../../assets/images/Points.png" alt="">: {{levelService.currentLessonScoreCount}}</span>
   </h4>
   <app-lesson-progress [progress]="lessonProgress"></app-lesson-progress>
 
