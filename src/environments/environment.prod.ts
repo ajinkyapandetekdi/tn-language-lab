@@ -3,6 +3,7 @@ export const environment = {
   environment: "PRODUCTION",
   showEnvironment: true,
   loginApiUrl: "https://emislogin.tnschools.gov.in/emis_login/api/ATSLlogin",
+  lessonProgressEndpoint: 'lesson_scores',
   telemetryContext: {
     authToken: '',
     batchSize: 10,

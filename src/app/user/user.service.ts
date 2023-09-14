@@ -37,7 +37,7 @@ export class UserService {
   }
 
   getCurrentUserId() {
-    const userId = this.getUser()?.emis_username || 'anonymous';
+    const userId = this.getUser()?.emis_username || localStorage.getItem('did') || 'anonymous';
     return userId;
   }
 }

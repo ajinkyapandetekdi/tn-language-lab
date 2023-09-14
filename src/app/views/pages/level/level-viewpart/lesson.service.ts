@@ -12,18 +12,18 @@ export class LessonService {
   constructor(private http: HttpClient) {}
 
   getStudentScore(studentId: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/lesson_scores/student/${studentId}`);
+    return this.http.get(`${this.baseUrl}/${environment.lessonProgressEndpoint}/student/${studentId}`);
   }
 
   getLessonsData(studentId: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/lesson_scores/lessons/${studentId}`);
+    return this.http.get(`${this.baseUrl}/${environment.lessonProgressEndpoint}/lessons/${studentId}`);
   }
 
   getLessonScore(lessonId: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/lesson_scores/lesson/${lessonId}`);
+    return this.http.get(`${this.baseUrl}/${environment.lessonProgressEndpoint}/lesson/${lessonId}`);
   }
 
   postLessonScore(studentId: number, lessonId: string, score: number): Observable<any> {
-    return this.http.post(`${this.baseUrl}/lesson_scores/${studentId}/${lessonId}`, { score });
+    return this.http.post(`${this.baseUrl}/${environment.lessonProgressEndpoint}/${studentId}/${lessonId}`, { score });
   }
 }
